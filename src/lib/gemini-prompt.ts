@@ -25,17 +25,22 @@ ${typeInstruction}
    - Spring/Fall: ~16 weeks from the start date
    - Summer: ~8 weeks from the start date
    Week 1 begins on the semester start date (${request.semesterStartDate}). Use this to calculate exact dates for week-based references like "Week 7".
-3. Date/time defaults:
-   - Assignments with no time specified: set time to 23:59 (11:59 PM)
-   - Exams with no time specified: mark as all-day events (isAllDay: true)
+3. Date/time defaults for assignments/homework/projects:
+   - Create a 59-minute calendar block BEFORE the deadline. For example, if due at 11:59 PM, set startDate to 11:00 PM and endDate to 11:59 PM on the same day.
+   - If the syllabus specifies an exact due time, use that as endDate and set startDate to 1 hour before.
+   - If the syllabus says "due before class" and class times are mentioned, use the class start time as endDate and 1 hour before as startDate.
+   - If no due time can be determined at all, default to startDate=23:00 (11 PM) and endDate=23:59 (11:59 PM) on the due date.
+   - ALWAYS set both startDate and endDate for assignments. Never leave endDate as null for assignments.
+4. Date/time defaults for exams/quizzes:
+   - If no time is specified: mark as all-day events (isAllDay: true)
    - If only a week number is given (e.g., "Week 7"), span the event across that entire week (Monday to Friday)
-4. Confidence levels:
+5. Confidence levels:
    - "high": exact date and type are explicitly stated
    - "medium": date is stated but time is inferred or type is ambiguous
    - "low": date is approximate, week-based, or unclear
-5. Deduplicate: if the same event appears multiple times, include it only once.
-6. Include the exact source_snippet from the syllabus (verbatim, max 100 chars).
-7. Prefix each event title with the course name (e.g., "${request.courseName} HW 3").
+6. Deduplicate: if the same event appears multiple times, include it only once.
+7. Include the exact source_snippet from the syllabus (verbatim, max 100 chars).
+8. Prefix each event title with the course name (e.g., "${request.courseName} HW 3").
 
 ## Output Format
 Return a JSON array of objects with these exact fields:
