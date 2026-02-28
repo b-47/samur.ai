@@ -1,7 +1,15 @@
 import { CalendarEvent } from "./types";
 
-function formatDateCompact(dateStr: string): string {
+function safeDate(dateStr: string): Date {
   const d = new Date(dateStr);
+  if (isNaN(d.getTime())) {
+    return new Date(); // fallback to now
+  }
+  return d;
+}
+
+function formatDateCompact(dateStr: string): string {
+  const d = safeDate(dateStr);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
@@ -9,7 +17,7 @@ function formatDateCompact(dateStr: string): string {
 }
 
 function formatDateTimeCompact(dateStr: string): string {
-  const d = new Date(dateStr);
+  const d = safeDate(dateStr);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
@@ -20,7 +28,7 @@ function formatDateTimeCompact(dateStr: string): string {
 }
 
 function addDays(dateStr: string, days: number): string {
-  const d = new Date(dateStr);
+  const d = safeDate(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString();
 }
@@ -48,9 +56,8 @@ export function googleCalendarUrl(event: CalendarEvent, timezone: string): strin
     const endStr = formatDateTimeCompact(
       end === event.startDate ? addDays(event.startDate, 0) : end
     );
-    // If start equals end, add 1 hour
     if (startStr === endStr) {
-      const d = new Date(event.startDate);
+      const d = safeDate(event.startDate);
       d.setHours(d.getHours() + 1);
       params.set("dates", `${startStr}/${formatDateTimeCompact(d.toISOString())}`);
     } else {
@@ -62,16 +69,17 @@ export function googleCalendarUrl(event: CalendarEvent, timezone: string): strin
 }
 
 export function outlookCalendarUrl(event: CalendarEvent): string {
-  const startDt = new Date(event.startDate).toISOString();
+  const startD = safeDate(event.startDate);
+  const startDt = startD.toISOString();
   const endDate = getEndDate(event);
   let endDt: string;
 
   if (endDate === event.startDate && !event.isAllDay) {
-    const d = new Date(event.startDate);
+    const d = new Date(startD);
     d.setHours(d.getHours() + 1);
     endDt = d.toISOString();
   } else {
-    endDt = new Date(endDate).toISOString();
+    endDt = safeDate(endDate).toISOString();
   }
 
   const params = new URLSearchParams({

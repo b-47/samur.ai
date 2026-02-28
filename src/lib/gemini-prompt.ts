@@ -13,6 +13,7 @@ export function buildExtractionPrompt(request: ExtractionRequest): string {
 ## Context
 - Course: ${request.courseName}
 - Semester: ${request.semester}
+- First day of classes: ${request.semesterStartDate}
 - Timezone: ${request.timezone}
 
 ## What to Extract
@@ -20,10 +21,10 @@ ${typeInstruction}
 
 ## Rules
 1. Extract ONLY events that are explicitly stated or clearly implied in the syllabus. Do not invent events.
-2. For recurring patterns like "HW due every Friday" or "weekly quizzes on Monday", expand into individual events for EACH week of the semester. Use standard academic semester dates for ${request.semester}:
-   - Spring semester: mid-January to early May (~16 weeks)
-   - Fall semester: late August to mid-December (~16 weeks)
-   - Summer semester: June to August (~8 weeks)
+2. For recurring patterns like "HW due every Friday" or "weekly quizzes on Monday", expand into individual events for EACH week of the semester. The semester starts on ${request.semesterStartDate} and runs approximately:
+   - Spring/Fall: ~16 weeks from the start date
+   - Summer: ~8 weeks from the start date
+   Week 1 begins on the semester start date (${request.semesterStartDate}). Use this to calculate exact dates for week-based references like "Week 7".
 3. Date/time defaults:
    - Assignments with no time specified: set time to 23:59 (11:59 PM)
    - Exams with no time specified: mark as all-day events (isAllDay: true)

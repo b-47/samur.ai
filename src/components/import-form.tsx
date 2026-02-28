@@ -39,6 +39,7 @@ const timezones = [
 export function ImportForm({ onSubmit, loading }: ImportFormProps) {
   const [courseName, setCourseName] = useState("");
   const [semester, setSemester] = useState("Spring 2026");
+  const [semesterStartDate, setSemesterStartDate] = useState("2026-01-20");
   const [timezone, setTimezone] = useState("America/Chicago");
   const [eventTypes, setEventTypes] = useState<"assignments" | "assessments" | "both">("both");
   const [syllabusText, setSyllabusText] = useState("");
@@ -46,7 +47,7 @@ export function ImportForm({ onSubmit, loading }: ImportFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!courseName.trim() || !syllabusText.trim()) return;
-    onSubmit({ courseName, semester, timezone, eventTypes, syllabusText });
+    onSubmit({ courseName, semester, semesterStartDate, timezone, eventTypes, syllabusText });
   };
 
   return (
@@ -81,6 +82,16 @@ export function ImportForm({ onSubmit, loading }: ImportFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
+          <Label htmlFor="semesterStart">First Day of Classes</Label>
+          <Input
+            id="semesterStart"
+            type="date"
+            value={semesterStartDate}
+            onChange={(e) => setSemesterStartDate(e.target.value)}
+            required
+          />
+        </div>
+        <div className="space-y-2">
           <Label htmlFor="timezone">Timezone</Label>
           <Select value={timezone} onValueChange={setTimezone}>
             <SelectTrigger id="timezone">
@@ -95,24 +106,25 @@ export function ImportForm({ onSubmit, loading }: ImportFormProps) {
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2">
-          <Label>Event Types</Label>
-          <div className="flex gap-1 rounded-lg bg-muted p-1">
-            {(["both", "assignments", "assessments"] as const).map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setEventTypes(type)}
-                className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors capitalize cursor-pointer ${
-                  eventTypes === type
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label>Event Types</Label>
+        <div className="flex gap-1 rounded-lg bg-muted p-1">
+          {(["both", "assignments", "assessments"] as const).map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setEventTypes(type)}
+              className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium transition-colors capitalize cursor-pointer ${
+                eventTypes === type
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {type}
+            </button>
+          ))}
         </div>
       </div>
 

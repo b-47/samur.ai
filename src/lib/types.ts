@@ -17,6 +17,7 @@ export interface ExtractionRequest {
   syllabusText: string;
   courseName: string;
   semester: string;
+  semesterStartDate: string; // e.g. "2026-01-20"
   timezone: string;
   eventTypes: "assignments" | "assessments" | "both";
 }

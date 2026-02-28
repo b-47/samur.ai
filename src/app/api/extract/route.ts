@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const prompt = buildExtractionPrompt(body);
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -72,8 +72,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ events: dedupedEvents });
   } catch (error) {
     console.error("Extraction error:", error);
+    const message = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { events: [], error: "Failed to extract events. Please try again." },
+      { events: [], error: `Extraction failed: ${message}` },
       { status: 500 }
     );
   }
