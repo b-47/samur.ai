@@ -97,29 +97,31 @@ export function ImportForm({ onSubmit, loading }: ImportFormProps) {
     onSubmit(formData);
   };
 
+  const MAX_PDF_BYTES = 10 * 1024 * 1024; // 10 MB
+
+  const acceptPdf = (file: File) => {
+    if (file.type !== "application/pdf") return;
+    if (file.size > MAX_PDF_BYTES) {
+      alert(`PDF is too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Please upload a file under 10 MB.`);
+      return;
+    }
+    setPdfFile(file);
+    setInputMode("pdf");
+    const inferredCourseName = inferCourseNameFromPdf(file.name);
+    if (inferredCourseName && !courseName.trim()) {
+      setCourseName(inferredCourseName);
+    }
+  };
+
   const handleFileDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    if (file?.type === "application/pdf") {
-      setPdfFile(file);
-      setInputMode("pdf");
-      const inferredCourseName = inferCourseNameFromPdf(file.name);
-      if (inferredCourseName && !courseName.trim()) {
-        setCourseName(inferredCourseName);
-      }
-    }
+    if (file) acceptPdf(file);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setPdfFile(file);
-      setInputMode("pdf");
-      const inferredCourseName = inferCourseNameFromPdf(file.name);
-      if (inferredCourseName && !courseName.trim()) {
-        setCourseName(inferredCourseName);
-      }
-    }
+    if (file) acceptPdf(file);
   };
 
   return (
