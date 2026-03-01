@@ -5,7 +5,6 @@ import { deduplicateEvents } from "@/lib/dedup";
 import { CalendarEvent } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
@@ -31,12 +30,7 @@ export async function POST(request: NextRequest) {
       const pdfFile = formData.get("pdfFile") as File | null;
       if (pdfFile) {
         const buffer = await pdfFile.arrayBuffer();
-        const bytes = new Uint8Array(buffer);
-        let binary = "";
-        for (let i = 0; i < bytes.length; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        pdfBase64 = btoa(binary);
+        pdfBase64 = Buffer.from(buffer).toString("base64");
       }
     } else {
       const body = await request.json();
