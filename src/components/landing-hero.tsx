@@ -125,7 +125,7 @@ export function LandingHero({ onGetStarted }: LandingHeroProps) {
               lineHeight: 1.6,
             }}>
               Turn your syllabus into calendar events in seconds.<br />
-              Paste, extract, export.
+              Cut through the clutter.
             </p>
             <button className="sl-cta" onClick={onGetStarted}>
               Get Started
