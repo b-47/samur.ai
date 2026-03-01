@@ -1,6 +1,6 @@
 # Samur.ai 🌸
 
-Automate your semester planning.
+Cut through the clutter.
 
 Samur.ai extracts assignment and exam deadlines from course syllabi and turns them into calendar events in seconds.
 
