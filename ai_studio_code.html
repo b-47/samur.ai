@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Cherry Blossom</title>
+    
+    <!-- Sleek modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc; /* Sleek, very light off-white */
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            color: #111;
+        }
+
+        /* Hero Content Container - Left Aligned for modern look */
+        .hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
+            z-index: 10;
+            pointer-events: none; /* Let clicks pass through to background */
+        }
+
+        .hero-content {
+            max-width: 500px;
+            pointer-events: auto; /* Re-enable clicks for the button */
+        }
+
+        .hero h1 {
+            font-weight: 300;
+            font-size: 4.5rem;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #000;
+        }
+
+        .hero p {
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background-color: #f5789a;
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 4px; /* Sleek square-ish corners */
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-btn:hover {
+            background-color: #e06283;
+            transform: translateY(-2px);
+        }
+
+        /* SVG Tree Container - Pinned to the right */
+        .tree-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .tree-container svg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: bottom right;
+        }
+
+        /* Falling Leaves Container */
+        #leaves-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Leaf Positioning & Falling Animation */
+        .leaf {
+            position: absolute;
+            top: -10%;
+            animation: fall linear infinite; 
+        }
+
+        /* Flat Vector Petal Shape & Swaying Animation */
+        .petal {
+            width: 14px;
+            height: 14px;
+            /* Creates a flat tear-drop / petal shape */
+            border-radius: 15px 0px 15px 0px; 
+            background: #f5789a;
+            --scale: 1;
+            animation: sway 3s ease-in-out infinite alternate;
+        }
+
+        /* Vertical Fall Keyframes */
+        @keyframes fall {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        /* Horizontal Sway Keyframes */
+        @keyframes sway {
+            0% { transform: scale(var(--scale)) translateX(-25px) rotate(0deg); }
+            100% { transform: scale(var(--scale)) translateX(25px) rotate(100deg); }
+        }
+
+        /* Distribute Leaves Across the Screen Randomly using CSS */
+        .leaf:nth-child(1) { left: 10%; animation-duration: 11s; animation-delay: -2s; }
+        .leaf:nth-child(2) { left: 20%; animation-duration: 14s; animation-delay: -5s; }
+        .leaf:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: -7s; }
+        .leaf:nth-child(4) { left: 40%; animation-duration: 13s; animation-delay: -1s; }
+        .leaf:nth-child(5) { left: 50%; animation-duration: 12s; animation-delay: -4s; }
+        .leaf:nth-child(6) { left: 60%; animation-duration: 15s; animation-delay: -8s; }
+        .leaf:nth-child(7) { left: 70%; animation-duration: 11s; animation-delay: -3s; }
+        .leaf:nth-child(8) { left: 80%; animation-duration: 14s; animation-delay: -6s; }
+        .leaf:nth-child(9) { left: 90%; animation-duration: 12s; animation-delay: -2s; }
+        .leaf:nth-child(10) { left: 85%; animation-duration: 10s; animation-delay: -9s; }
+        .leaf:nth-child(11) { left: 15%; animation-duration: 16s; animation-delay: -1s; }
+        .leaf:nth-child(12) { left: 35%; animation-duration: 12s; animation-delay: -5s; }
+        .leaf:nth-child(13) { left: 55%; animation-duration: 14s; animation-delay: -7s; }
+        .leaf:nth-child(14) { left: 75%; animation-duration: 11s; animation-delay: -4s; }
+        .leaf:nth-child(15) { left: 95%; animation-duration: 13s; animation-delay: -6s; }
+
+        /* Randomize Petal Sizes, Opacities, and Sway Speeds */
+        .leaf:nth-child(even) .petal { 
+            --scale: 0.7; 
+            opacity: 0.8;
+            animation-duration: 4s; 
+            animation-direction: alternate-reverse; 
+        }
+        .leaf:nth-child(3n) .petal { 
+            --scale: 1.1; 
+            animation-duration: 3.5s; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sleek Left-Aligned Hero Section -->
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Spring<br>Awakening.</h1>
+            <p>Experience the stark beauty of nature's renewal. Find your clarity and peace beneath the falling petals.</p>
+            <button class="cta-btn">Discover More</button>
+        </div>
+    </main>
+
+    <!-- Falling CSS Leaves -->
+    <div id="leaves-container">
+        <!-- 15 floating petal divs -->
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+    </div>
+
+    <!-- Stylized / Ink-wash Tree Background -->
+    <div class="tree-container">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg">
+            
+            <defs>
+                <!-- Stylized 5-petal flower with black center -->
+                <g id="flower">
+                    <circle cx="0" cy="-14" r="11" fill="#f5789a"/>
+                    <circle cx="-13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="-8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="0" cy="0" r="4" fill="#000"/>
+                </g>
+
+                <!-- Plain stylized 5-petal flower (no center) -->
+                <g id="flower-plain">
+                    <circle cx="0" cy="-14" r="11" fill="#f5789a"/>
+                    <circle cx="-13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="-8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="8" cy="12" r="11" fill="#f5789a"/>
+                </g>
+
+                <!-- Isolated loose petal -->
+                <path id="svg-petal" d="M0,0 C-8,-8 -8,-16 0,-20 C8,-16 8,-8 0,0" fill="#f5789a"/>
+            </defs>
+
+            <!-- Ink-brush jagged tree branches -->
+            <g fill="#0c0c0c">
+                <!-- Main trunk -->
+                <path d="M650,1000 L600,850 L610,800 L560,650 L580,620 L500,500 L520,490 L590,600 L650,780 L680,1000 Z"/>
+                <!-- Left heavy split -->
+                <path d="M570,640 L500,580 L420,590 L350,500 L370,490 L450,560 L520,550 L585,610 Z"/>
+                <!-- Left thinner twigs -->
+                <path d="M430,570 L380,450 L310,400 L320,380 L390,440 L450,550 Z"/>
+                <path d="M350,500 L280,480 L220,400 L230,380 L300,460 L360,480 Z"/>
+                <path d="M390,440 L350,350 L370,360 L400,430 Z"/>
+                <path d="M310,400 L250,320 L270,330 L320,390 Z"/>
+                <!-- Right heavy split -->
+                <path d="M610,800 L700,720 L750,600 L820,480 L800,470 L730,590 L680,700 L595,760 Z"/>
+                <!-- Right thinner twigs -->
+                <path d="M740,600 L820,550 L880,450 L860,440 L800,530 L720,580 Z"/>
+                <path d="M700,720 L780,680 L840,650 L830,630 L760,660 Z"/>
+                <path d="M820,550 L880,580 L870,590 L810,560 Z"/>
+                <path d="M880,450 L950,400 L940,390 L875,440 Z"/>
+                <!-- Top center split & twigs -->
+                <path d="M500,500 L450,400 L460,300 L480,310 L470,410 L515,490 Z"/>
+                <path d="M460,300 L420,220 L440,230 L470,310 Z"/>
+                <path d="M450,400 L520,320 L510,310 L445,390 Z"/>
+                <path d="M520,320 L560,250 L580,260 L530,330 Z"/>
+            </g>
+
+            <!-- Stylized Flowers & Loose Petals Placements -->
+            
+            <!-- Left Branch Flowers -->
+            <use href="#flower" transform="translate(220, 400) scale(1.1) rotate(20)"/>
+            <use href="#flower-plain" transform="translate(280, 480) scale(0.9) rotate(-15)"/>
+            <use href="#flower" transform="translate(350, 350) scale(1.3) rotate(45)"/>
+            <use href="#flower-plain" transform="translate(310, 400) scale(0.8)"/>
+            <use href="#flower" transform="translate(250, 320) scale(1) rotate(-30)"/>
+            <use href="#svg-petal" transform="translate(180, 380) scale(1.2) rotate(60)"/>
+            <use href="#svg-petal" transform="translate(200, 440) scale(0.9) rotate(110)"/>
+
+            <!-- Center & Top Flowers -->
+            <use href="#flower" transform="translate(420, 220) scale(1.4) rotate(10)"/>
+            <use href="#flower-plain" transform="translate(470, 310) scale(1.1) rotate(80)"/>
+            <use href="#flower" transform="translate(560, 250) scale(1.2) rotate(-20)"/>
+            <use href="#flower-plain" transform="translate(520, 320) scale(0.9)"/>
+            <use href="#flower" transform="translate(450, 400) scale(1.3) rotate(35)"/>
+            <use href="#svg-petal" transform="translate(380, 250) scale(1.3) rotate(-45)"/>
+            <use href="#svg-petal" transform="translate(500, 200) scale(1.1) rotate(15)"/>
+
+            <!-- Right Branch Flowers -->
+            <use href="#flower" transform="translate(750, 600) scale(1.2) rotate(-10)"/>
+            <use href="#flower-plain" transform="translate(820, 550) scale(1.3) rotate(40)"/>
+            <use href="#flower" transform="translate(880, 450) scale(1.1) rotate(25)"/>
+            <use href="#flower-plain" transform="translate(840, 650) scale(0.8) rotate(-50)"/>
+            <use href="#flower" transform="translate(950, 400) scale(1.2) rotate(15)"/>
+            <use href="#flower-plain" transform="translate(880, 580) scale(1)"/>
+            <use href="#svg-petal" transform="translate(920, 500) scale(1.2) rotate(80)"/>
+            <use href="#svg-petal" transform="translate(790, 680) scale(0.9) rotate(30)"/>
+            
+            <!-- Mid Trunk / Scattered -->
+            <use href="#flower-plain" transform="translate(580, 620) scale(0.8) rotate(10)"/>
+            <use href="#svg-petal" transform="translate(680, 500) scale(1.5) rotate(-20)"/>
+            <use href="#svg-petal" transform="translate(450, 620) scale(1.1) rotate(45)"/>
+            
+        </svg>
+    </div>
+
+</body>
+</html>
