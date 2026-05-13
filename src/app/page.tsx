@@ -11,6 +11,7 @@ import { ExportPanel } from "@/components/export-panel";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "@/components/theme-provider";
 import { CalendarEvent } from "@/lib/types";
+import demoEvents from "../../stat200_extracted.json";
 
 type Step = "landing" | "import" | "loading" | "review" | "export";
 
@@ -50,6 +51,14 @@ export default function Home() {
     setCourseName(formData.get("courseName") as string);
     setTimezone(formData.get("timezone") as string);
     setStep("loading");
+
+    if (formData.get("demo") === "true") {
+      await new Promise((resolve) => setTimeout(resolve, 2600));
+      setEvents(demoEvents as CalendarEvent[]);
+      setStep("review");
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/extract", {
