@@ -1,0 +1,4511 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: LICENSE STAT200S26 Syllabus.pdf
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.env.example
+.gitignore
+ai_studio_code.html
+CLAUDE.md
+components.json
+eslint.config.mjs
+next.config.ts
+package.json
+postcss.config.mjs
+public/file.svg
+public/globe.svg
+public/next.svg
+public/vercel.svg
+public/window.svg
+README.md
+Samur.ai_PRD.md
+src/app/api/extract/route.ts
+src/app/globals.css
+src/app/icon.svg
+src/app/layout.tsx
+src/app/page.tsx
+src/components/confidence-badge.tsx
+src/components/event-card.tsx
+src/components/event-edit-dialog.tsx
+src/components/export-panel.tsx
+src/components/import-form.tsx
+src/components/landing-hero.tsx
+src/components/loading-screen.tsx
+src/components/pdf-uploader.tsx
+src/components/review-grid.tsx
+src/components/stepper.tsx
+src/components/theme-provider.tsx
+src/components/theme-toggle.tsx
+src/components/ui/badge.tsx
+src/components/ui/button.tsx
+src/components/ui/card.tsx
+src/components/ui/dialog.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/select.tsx
+src/components/ui/separator.tsx
+src/components/ui/tabs.tsx
+src/components/ui/textarea.tsx
+src/lib/calendar-links.ts
+src/lib/dedup.ts
+src/lib/gemini-prompt.ts
+src/lib/ics-generator.ts
+src/lib/types.ts
+src/lib/utils.ts
+stat200_extracted.json
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".env.example">
+GEMINI_API_KEY=your_gemini_api_key_here
+</file>
+
+<file path="ai_studio_code.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Cherry Blossom</title>
+    
+    <!-- Sleek modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc; /* Sleek, very light off-white */
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            color: #111;
+        }
+
+        /* Hero Content Container - Left Aligned for modern look */
+        .hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
+            z-index: 10;
+            pointer-events: none; /* Let clicks pass through to background */
+        }
+
+        .hero-content {
+            max-width: 500px;
+            pointer-events: auto; /* Re-enable clicks for the button */
+        }
+
+        .hero h1 {
+            font-weight: 300;
+            font-size: 4.5rem;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #000;
+        }
+
+        .hero p {
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background-color: #f5789a;
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 4px; /* Sleek square-ish corners */
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-btn:hover {
+            background-color: #e06283;
+            transform: translateY(-2px);
+        }
+
+        /* SVG Tree Container - Pinned to the right */
+        .tree-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .tree-container svg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: bottom right;
+        }
+
+        /* Falling Leaves Container */
+        #leaves-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Leaf Positioning & Falling Animation */
+        .leaf {
+            position: absolute;
+            top: -10%;
+            animation: fall linear infinite; 
+        }
+
+        /* Flat Vector Petal Shape & Swaying Animation */
+        .petal {
+            width: 14px;
+            height: 14px;
+            /* Creates a flat tear-drop / petal shape */
+            border-radius: 15px 0px 15px 0px; 
+            background: #f5789a;
+            --scale: 1;
+            animation: sway 3s ease-in-out infinite alternate;
+        }
+
+        /* Vertical Fall Keyframes */
+        @keyframes fall {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        /* Horizontal Sway Keyframes */
+        @keyframes sway {
+            0% { transform: scale(var(--scale)) translateX(-25px) rotate(0deg); }
+            100% { transform: scale(var(--scale)) translateX(25px) rotate(100deg); }
+        }
+
+        /* Distribute Leaves Across the Screen Randomly using CSS */
+        .leaf:nth-child(1) { left: 10%; animation-duration: 11s; animation-delay: -2s; }
+        .leaf:nth-child(2) { left: 20%; animation-duration: 14s; animation-delay: -5s; }
+        .leaf:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: -7s; }
+        .leaf:nth-child(4) { left: 40%; animation-duration: 13s; animation-delay: -1s; }
+        .leaf:nth-child(5) { left: 50%; animation-duration: 12s; animation-delay: -4s; }
+        .leaf:nth-child(6) { left: 60%; animation-duration: 15s; animation-delay: -8s; }
+        .leaf:nth-child(7) { left: 70%; animation-duration: 11s; animation-delay: -3s; }
+        .leaf:nth-child(8) { left: 80%; animation-duration: 14s; animation-delay: -6s; }
+        .leaf:nth-child(9) { left: 90%; animation-duration: 12s; animation-delay: -2s; }
+        .leaf:nth-child(10) { left: 85%; animation-duration: 10s; animation-delay: -9s; }
+        .leaf:nth-child(11) { left: 15%; animation-duration: 16s; animation-delay: -1s; }
+        .leaf:nth-child(12) { left: 35%; animation-duration: 12s; animation-delay: -5s; }
+        .leaf:nth-child(13) { left: 55%; animation-duration: 14s; animation-delay: -7s; }
+        .leaf:nth-child(14) { left: 75%; animation-duration: 11s; animation-delay: -4s; }
+        .leaf:nth-child(15) { left: 95%; animation-duration: 13s; animation-delay: -6s; }
+
+        /* Randomize Petal Sizes, Opacities, and Sway Speeds */
+        .leaf:nth-child(even) .petal { 
+            --scale: 0.7; 
+            opacity: 0.8;
+            animation-duration: 4s; 
+            animation-direction: alternate-reverse; 
+        }
+        .leaf:nth-child(3n) .petal { 
+            --scale: 1.1; 
+            animation-duration: 3.5s; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sleek Left-Aligned Hero Section -->
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Spring<br>Awakening.</h1>
+            <p>Experience the stark beauty of nature's renewal. Find your clarity and peace beneath the falling petals.</p>
+            <button class="cta-btn">Discover More</button>
+        </div>
+    </main>
+
+    <!-- Falling CSS Leaves -->
+    <div id="leaves-container">
+        <!-- 15 floating petal divs -->
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+        <div class="leaf"><div class="petal"></div></div>
+    </div>
+
+    <!-- Stylized / Ink-wash Tree Background -->
+    <div class="tree-container">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg">
+            
+            <defs>
+                <!-- Stylized 5-petal flower with black center -->
+                <g id="flower">
+                    <circle cx="0" cy="-14" r="11" fill="#f5789a"/>
+                    <circle cx="-13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="-8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="0" cy="0" r="4" fill="#000"/>
+                </g>
+
+                <!-- Plain stylized 5-petal flower (no center) -->
+                <g id="flower-plain">
+                    <circle cx="0" cy="-14" r="11" fill="#f5789a"/>
+                    <circle cx="-13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="13" cy="-4" r="11" fill="#f5789a"/>
+                    <circle cx="-8" cy="12" r="11" fill="#f5789a"/>
+                    <circle cx="8" cy="12" r="11" fill="#f5789a"/>
+                </g>
+
+                <!-- Isolated loose petal -->
+                <path id="svg-petal" d="M0,0 C-8,-8 -8,-16 0,-20 C8,-16 8,-8 0,0" fill="#f5789a"/>
+            </defs>
+
+            <!-- Ink-brush jagged tree branches -->
+            <g fill="#0c0c0c">
+                <!-- Main trunk -->
+                <path d="M650,1000 L600,850 L610,800 L560,650 L580,620 L500,500 L520,490 L590,600 L650,780 L680,1000 Z"/>
+                <!-- Left heavy split -->
+                <path d="M570,640 L500,580 L420,590 L350,500 L370,490 L450,560 L520,550 L585,610 Z"/>
+                <!-- Left thinner twigs -->
+                <path d="M430,570 L380,450 L310,400 L320,380 L390,440 L450,550 Z"/>
+                <path d="M350,500 L280,480 L220,400 L230,380 L300,460 L360,480 Z"/>
+                <path d="M390,440 L350,350 L370,360 L400,430 Z"/>
+                <path d="M310,400 L250,320 L270,330 L320,390 Z"/>
+                <!-- Right heavy split -->
+                <path d="M610,800 L700,720 L750,600 L820,480 L800,470 L730,590 L680,700 L595,760 Z"/>
+                <!-- Right thinner twigs -->
+                <path d="M740,600 L820,550 L880,450 L860,440 L800,530 L720,580 Z"/>
+                <path d="M700,720 L780,680 L840,650 L830,630 L760,660 Z"/>
+                <path d="M820,550 L880,580 L870,590 L810,560 Z"/>
+                <path d="M880,450 L950,400 L940,390 L875,440 Z"/>
+                <!-- Top center split & twigs -->
+                <path d="M500,500 L450,400 L460,300 L480,310 L470,410 L515,490 Z"/>
+                <path d="M460,300 L420,220 L440,230 L470,310 Z"/>
+                <path d="M450,400 L520,320 L510,310 L445,390 Z"/>
+                <path d="M520,320 L560,250 L580,260 L530,330 Z"/>
+            </g>
+
+            <!-- Stylized Flowers & Loose Petals Placements -->
+            
+            <!-- Left Branch Flowers -->
+            <use href="#flower" transform="translate(220, 400) scale(1.1) rotate(20)"/>
+            <use href="#flower-plain" transform="translate(280, 480) scale(0.9) rotate(-15)"/>
+            <use href="#flower" transform="translate(350, 350) scale(1.3) rotate(45)"/>
+            <use href="#flower-plain" transform="translate(310, 400) scale(0.8)"/>
+            <use href="#flower" transform="translate(250, 320) scale(1) rotate(-30)"/>
+            <use href="#svg-petal" transform="translate(180, 380) scale(1.2) rotate(60)"/>
+            <use href="#svg-petal" transform="translate(200, 440) scale(0.9) rotate(110)"/>
+
+            <!-- Center & Top Flowers -->
+            <use href="#flower" transform="translate(420, 220) scale(1.4) rotate(10)"/>
+            <use href="#flower-plain" transform="translate(470, 310) scale(1.1) rotate(80)"/>
+            <use href="#flower" transform="translate(560, 250) scale(1.2) rotate(-20)"/>
+            <use href="#flower-plain" transform="translate(520, 320) scale(0.9)"/>
+            <use href="#flower" transform="translate(450, 400) scale(1.3) rotate(35)"/>
+            <use href="#svg-petal" transform="translate(380, 250) scale(1.3) rotate(-45)"/>
+            <use href="#svg-petal" transform="translate(500, 200) scale(1.1) rotate(15)"/>
+
+            <!-- Right Branch Flowers -->
+            <use href="#flower" transform="translate(750, 600) scale(1.2) rotate(-10)"/>
+            <use href="#flower-plain" transform="translate(820, 550) scale(1.3) rotate(40)"/>
+            <use href="#flower" transform="translate(880, 450) scale(1.1) rotate(25)"/>
+            <use href="#flower-plain" transform="translate(840, 650) scale(0.8) rotate(-50)"/>
+            <use href="#flower" transform="translate(950, 400) scale(1.2) rotate(15)"/>
+            <use href="#flower-plain" transform="translate(880, 580) scale(1)"/>
+            <use href="#svg-petal" transform="translate(920, 500) scale(1.2) rotate(80)"/>
+            <use href="#svg-petal" transform="translate(790, 680) scale(0.9) rotate(30)"/>
+            
+            <!-- Mid Trunk / Scattered -->
+            <use href="#flower-plain" transform="translate(580, 620) scale(0.8) rotate(10)"/>
+            <use href="#svg-petal" transform="translate(680, 500) scale(1.5) rotate(-20)"/>
+            <use href="#svg-petal" transform="translate(450, 620) scale(1.1) rotate(45)"/>
+            
+        </svg>
+    </div>
+
+</body>
+</html>
+</file>
+
+<file path="CLAUDE.md">
+# Workflow Orchestration
+
+## 1. Plan Mode Default
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
+- If something goes sideways, STOP and re-plan immediately – don't keep pushing
+- Use plan mode for verification steps, not just building
+- Write detailed specs upfront to reduce ambiguity
+
+## 2. Subagent Strategy
+- Use subagents liberally to keep main context window clean
+- Offload research, exploration, and parallel analysis to subagents
+- For complex problems, throw more compute at it via subagents
+- One task per subagent for focused execution
+
+## 3. Self-Improvement Loop
+- After ANY correction from the user, update `tasks/lessons.md` with the pattern
+- Write rules for yourself that prevent the same mistake
+- Ruthlessly iterate on these lessons until mistake rate drops
+- Review lessons at session start for relevant project
+
+## 4. Verification Before Done
+- Never mark a task complete without proving it works
+- Diff behavior between main and your changes when relevant
+- Ask yourself: "Would a staff engineer approve this?"
+- Run tests, check logs, demonstrate correctness
+
+## 5. Demand Elegance (Balanced)
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- If a fix feels hacky: "rethinking everything I know now, implement the elegant solution"
+- Skip this for simple, obvious fixes – don't over-engineer
+- Challenge your own work before presenting it
+
+## 6. Autonomous Bug Fixing
+- When given a bug report: just fix it. Don't ask for hand-holding
+- Point at logs, errors, failing tests – then resolve them
+- Zero context switching required from the user
+- Go fix failing CI tests without being told how
+
+# Task Management
+
+1. **⬅Plan First**: Write plan to `tasks/todo.md` with checkable items
+2. **⬅Verify Plan**: Check in before starting implementation
+3. **⬅Track Progress**: Work items complete as you go
+4. **⬅Explain Changes**: High-level summary at each step
+5. **⬅Document Results**: Add review section to `tasks/todo.md`
+6. **⬅Capture Lessons**: Update `tasks/lessons.md` after corrections
+
+# Core Principles
+
+- **⬅Simplicity First**: Make every change as simple as possible. Impact minimal code
+- **⬅No Laziness**: Find root causes. No temporary fixes. Senior developer standards
+- **⬅Minimal Impact**: Changes should only touch what's necessary. Avoid introducing new bugs
+</file>
+
+<file path="components.json">
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {}
+}
+</file>
+
+<file path="eslint.config.mjs">
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+
+export default eslintConfig;
+</file>
+
+<file path="postcss.config.mjs">
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="public/file.svg">
+<svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+</file>
+
+<file path="public/globe.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+</file>
+
+<file path="public/next.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+</file>
+
+<file path="public/vercel.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+</file>
+
+<file path="public/window.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+</file>
+
+<file path="src/app/icon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <text y=".9em" font-size="90">🌸</text>
+</svg>
+</file>
+
+<file path="src/components/confidence-badge.tsx">
+"use client";
+
+import { Badge } from "@/components/ui/badge";
+
+interface ConfidenceBadgeProps {
+  level: "high" | "medium" | "low";
+}
+
+const styles = {
+  high: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+  medium: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+  low: "bg-red-500/15 text-red-400 border-red-500/30",
+};
+
+export function ConfidenceBadge({ level }: ConfidenceBadgeProps) {
+  return (
+    <Badge variant="outline" className={styles[level]}>
+      {level}
+    </Badge>
+  );
+}
+</file>
+
+<file path="src/components/event-edit-dialog.tsx">
+"use client";
+
+import { useState } from "react";
+import { CalendarEvent } from "@/lib/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+interface EventEditDialogProps {
+  event: CalendarEvent | null;
+  open: boolean;
+  onSave: (id: string, updates: Partial<CalendarEvent>) => void;
+  onClose: () => void;
+}
+
+export function EventEditDialog({
+  event,
+  open,
+  onSave,
+  onClose,
+}: EventEditDialogProps) {
+  const [title, setTitle] = useState(event?.title || "");
+  const [type, setType] = useState<string>(event?.type || "other");
+  const [startDate, setStartDate] = useState(
+    event?.startDate ? new Date(event.startDate).toISOString().slice(0, 16) : ""
+  );
+  const [endDate, setEndDate] = useState(
+    event?.endDate ? new Date(event.endDate).toISOString().slice(0, 16) : ""
+  );
+  const [location, setLocation] = useState(event?.location || "");
+  const [notes, setNotes] = useState(event?.notes || "");
+  const [isAllDay, setIsAllDay] = useState(event?.isAllDay || false);
+
+  // Reset form when event changes
+  if (event && title === "" && event.title !== "") {
+    setTitle(event.title);
+    setType(event.type);
+    setStartDate(
+      event.startDate ? new Date(event.startDate).toISOString().slice(0, 16) : ""
+    );
+    setEndDate(
+      event.endDate ? new Date(event.endDate).toISOString().slice(0, 16) : ""
+    );
+    setLocation(event.location || "");
+    setNotes(event.notes || "");
+    setIsAllDay(event.isAllDay);
+  }
+
+  const handleSave = () => {
+    if (!event) return;
+    onSave(event.id, {
+      title,
+      type: type as CalendarEvent["type"],
+      startDate: new Date(startDate).toISOString(),
+      endDate: endDate ? new Date(endDate).toISOString() : undefined,
+      location: location || undefined,
+      notes: notes || undefined,
+      isAllDay,
+    });
+    onClose();
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Edit Event</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label>Title</Label>
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+          </div>
+          <div className="space-y-2">
+            <Label>Type</Label>
+            <Select value={type} onValueChange={setType}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {["assignment", "exam", "quiz", "lab", "project", "other"].map(
+                  (t) => (
+                    <SelectItem key={t} value={t} className="capitalize">
+                      {t}
+                    </SelectItem>
+                  )
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="allDay"
+              checked={isAllDay}
+              onChange={(e) => setIsAllDay(e.target.checked)}
+              className="cursor-pointer"
+            />
+            <Label htmlFor="allDay" className="cursor-pointer">All day</Label>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Start</Label>
+              <Input
+                type={isAllDay ? "date" : "datetime-local"}
+                value={isAllDay ? startDate.slice(0, 10) : startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>End</Label>
+              <Input
+                type={isAllDay ? "date" : "datetime-local"}
+                value={isAllDay ? endDate.slice(0, 10) : endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Location</Label>
+            <Input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Optional"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Notes</Label>
+            <Input
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Optional"
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button variant="ghost" onClick={onClose} className="cursor-pointer">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} className="cursor-pointer">Save</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+</file>
+
+<file path="src/components/loading-screen.tsx">
+"use client";
+
+import { motion } from "framer-motion";
+
+export function LoadingScreen() {
+  return (
+    <div className="flex flex-col items-center justify-center py-24">
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.7, 1, 0.7],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="w-16 h-16 rounded-full bg-primary/30 flex items-center justify-center mb-6"
+      >
+        <div className="w-8 h-8 rounded-full bg-primary" />
+      </motion.div>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-lg text-muted-foreground"
+      >
+        Extracting events from your syllabus...
+      </motion.p>
+      <p className="text-sm text-muted-foreground/50 mt-2">
+        This usually takes a few seconds
+      </p>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/pdf-uploader.tsx">
+"use client";
+
+import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+
+interface PdfUploaderProps {
+  onTextExtracted: (text: string) => void;
+}
+
+export function PdfUploader({ onTextExtracted }: PdfUploaderProps) {
+  const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = async (file: File) => {
+    if (file.type !== "application/pdf") {
+      alert("Please upload a PDF file.");
+      return;
+    }
+
+    setLoading(true);
+    setFileName(file.name);
+
+    try {
+      const pdfjsLib = await import("pdfjs-dist");
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pages: string[] = [];
+
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        const text = content.items
+          .map((item) => ("str" in item ? item.str : ""))
+          .join(" ");
+        pages.push(text);
+      }
+
+      onTextExtracted(pages.join("\n\n"));
+    } catch (err) {
+      console.error("PDF extraction error:", err);
+      alert("Failed to extract text from PDF. Try pasting the text manually.");
+      setFileName(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+  };
+
+  return (
+    <div
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={handleDrop}
+      className="border-2 border-dashed border-border rounded-lg p-4 text-center hover:border-primary/50 transition-colors"
+    >
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".pdf"
+        onChange={handleChange}
+        className="hidden"
+      />
+      {loading ? (
+        <p className="text-sm text-muted-foreground">Extracting text from PDF...</p>
+      ) : fileName ? (
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-sm text-primary">{fileName}</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setFileName(null);
+              if (fileInputRef.current) fileInputRef.current.value = "";
+            }}
+            className="cursor-pointer"
+          >
+            Clear
+          </Button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="w-full cursor-pointer"
+        >
+          <p className="text-sm text-muted-foreground">
+            Drop a PDF here or{" "}
+            <span className="text-primary underline">browse</span>
+          </p>
+        </button>
+      )}
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/stepper.tsx">
+"use client";
+
+const steps = ["Import", "Review", "Export"];
+
+interface StepperProps {
+  currentStep: number;
+}
+
+export function Stepper({ currentStep }: StepperProps) {
+  return (
+    <div className="flex items-center justify-center gap-2 mb-8">
+      {steps.map((step, i) => (
+        <div key={step} className="flex items-center gap-2">
+          <div
+            className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+              i <= currentStep
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {i + 1}
+          </div>
+          <span
+            className={`text-sm font-medium ${
+              i <= currentStep ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            {step}
+          </span>
+          {i < steps.length - 1 && (
+            <div
+              className={`w-12 h-0.5 mx-1 ${
+                i < currentStep ? "bg-primary" : "bg-muted"
+              }`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/theme-provider.tsx">
+"use client";
+
+import { createContext, useContext, useEffect, useState } from "react";
+
+type Theme = "dark" | "light";
+
+const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
+  theme: "light",
+  toggle: () => {},
+});
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>("light");
+
+  // Read stored preference on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("samurai-theme") as Theme | null;
+    if (stored === "light" || stored === "dark") {
+      setTheme(stored);
+    }
+  }, []);
+
+  // Apply class to <html> and persist
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("samurai-theme", theme);
+  }, [theme]);
+
+  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggle }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+</file>
+
+<file path="src/components/theme-toggle.tsx">
+"use client";
+
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "./theme-provider";
+import { Button } from "@/components/ui/button";
+
+export function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggle}
+      aria-label="Toggle theme"
+      className="fixed top-4 right-4 z-50 rounded-full w-9 h-9 cursor-pointer"
+    >
+      {theme === "dark" ? (
+        <Sun className="h-4 w-4" />
+      ) : (
+        <Moon className="h-4 w-4" />
+      )}
+    </Button>
+  );
+}
+</file>
+
+<file path="src/components/ui/badge.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+        secondary:
+          "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+        destructive:
+          "bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline:
+          "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 [a&]:hover:underline",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function Badge({
+  className,
+  variant = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "span"
+
+  return (
+    <Comp
+      data-slot="badge"
+      data-variant={variant}
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+export { Badge, badgeVariants }
+</file>
+
+<file path="src/components/ui/button.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline:
+          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost:
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9",
+        "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-8",
+        "icon-lg": "size-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "button"
+
+  return (
+    <Comp
+      data-slot="button"
+      data-variant={variant}
+      data-size={size}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
+}
+
+export { Button, buttonVariants }
+</file>
+
+<file path="src/components/ui/card.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Card({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card"
+      className={cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-title"
+      className={cn("leading-none font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
+function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
+}
+
+function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-action"
+      className={cn(
+        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-6", className)}
+      {...props}
+    />
+  )
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      {...props}
+    />
+  )
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}
+</file>
+
+<file path="src/components/ui/dialog.tsx">
+"use client"
+
+import * as React from "react"
+import { XIcon } from "lucide-react"
+import { Dialog as DialogPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+
+function Dialog({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Root>) {
+  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+}
+
+function DialogTrigger({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
+}
+
+function DialogPortal({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
+}
+
+function DialogClose({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+}
+
+function DialogOverlay({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+  return (
+    <DialogPrimitive.Overlay
+      data-slot="dialog-overlay"
+      className={cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+  showCloseButton?: boolean
+}) {
+  return (
+    <DialogPortal data-slot="dialog-portal">
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        data-slot="dialog-content"
+        className={cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 outline-none sm:max-w-lg",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        {showCloseButton && (
+          <DialogPrimitive.Close
+            data-slot="dialog-close"
+            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+          >
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        )}
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  )
+}
+
+function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="dialog-header"
+      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      {...props}
+    />
+  )
+}
+
+function DialogFooter({
+  className,
+  showCloseButton = false,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & {
+  showCloseButton?: boolean
+}) {
+  return (
+    <div
+      data-slot="dialog-footer"
+      className={cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      {showCloseButton && (
+        <DialogPrimitive.Close asChild>
+          <Button variant="outline">Close</Button>
+        </DialogPrimitive.Close>
+      )}
+    </div>
+  )
+}
+
+function DialogTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Title>) {
+  return (
+    <DialogPrimitive.Title
+      data-slot="dialog-title"
+      className={cn("text-lg leading-none font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
+function DialogDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Description>) {
+  return (
+    <DialogPrimitive.Description
+      data-slot="dialog-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
+}
+
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+}
+</file>
+
+<file path="src/components/ui/input.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+  return (
+    <input
+      type={type}
+      data-slot="input"
+      className={cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Input }
+</file>
+
+<file path="src/components/ui/label.tsx">
+"use client"
+
+import * as React from "react"
+import { Label as LabelPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Label({
+  className,
+  ...props
+}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+  return (
+    <LabelPrimitive.Root
+      data-slot="label"
+      className={cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Label }
+</file>
+
+<file path="src/components/ui/select.tsx">
+"use client"
+
+import * as React from "react"
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+import { Select as SelectPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Select({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Root>) {
+  return <SelectPrimitive.Root data-slot="select" {...props} />
+}
+
+function SelectGroup({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Group>) {
+  return <SelectPrimitive.Group data-slot="select-group" {...props} />
+}
+
+function SelectValue({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Value>) {
+  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+}
+
+function SelectTrigger({
+  className,
+  size = "default",
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+  size?: "sm" | "default"
+}) {
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="select-trigger"
+      data-size={size}
+      className={cn(
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDownIcon className="size-4 opacity-50" />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  )
+}
+
+function SelectContent({
+  className,
+  children,
+  position = "item-aligned",
+  align = "center",
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Content
+        data-slot="select-content"
+        className={cn(
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
+          position === "popper" &&
+            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          className
+        )}
+        position={position}
+        align={align}
+        {...props}
+      >
+        <SelectScrollUpButton />
+        <SelectPrimitive.Viewport
+          className={cn(
+            "p-1",
+            position === "popper" &&
+              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
+          )}
+        >
+          {children}
+        </SelectPrimitive.Viewport>
+        <SelectScrollDownButton />
+      </SelectPrimitive.Content>
+    </SelectPrimitive.Portal>
+  )
+}
+
+function SelectLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Label>) {
+  return (
+    <SelectPrimitive.Label
+      data-slot="select-label"
+      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+  return (
+    <SelectPrimitive.Item
+      data-slot="select-item"
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
+      )}
+      {...props}
+    >
+      <span
+        data-slot="select-item-indicator"
+        className="absolute right-2 flex size-3.5 items-center justify-center"
+      >
+        <SelectPrimitive.ItemIndicator>
+          <CheckIcon className="size-4" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
+  )
+}
+
+function SelectSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+  return (
+    <SelectPrimitive.Separator
+      data-slot="select-separator"
+      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+  return (
+    <SelectPrimitive.ScrollUpButton
+      data-slot="select-scroll-up-button"
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
+      {...props}
+    >
+      <ChevronUpIcon className="size-4" />
+    </SelectPrimitive.ScrollUpButton>
+  )
+}
+
+function SelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+  return (
+    <SelectPrimitive.ScrollDownButton
+      data-slot="select-scroll-down-button"
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
+      {...props}
+    >
+      <ChevronDownIcon className="size-4" />
+    </SelectPrimitive.ScrollDownButton>
+  )
+}
+
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+}
+</file>
+
+<file path="src/components/ui/separator.tsx">
+"use client"
+
+import * as React from "react"
+import { Separator as SeparatorPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Separator({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  ...props
+}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
+  return (
+    <SeparatorPrimitive.Root
+      data-slot="separator"
+      decorative={decorative}
+      orientation={orientation}
+      className={cn(
+        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Separator }
+</file>
+
+<file path="src/components/ui/tabs.tsx">
+"use client"
+
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Tabs as TabsPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Tabs({
+  className,
+  orientation = "horizontal",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      orientation={orientation}
+      className={cn(
+        "group/tabs flex gap-2 data-[orientation=horizontal]:flex-col",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+const tabsListVariants = cva(
+  "rounded-lg p-[3px] group-data-[orientation=horizontal]/tabs:h-9 data-[variant=line]:rounded-none group/tabs-list text-muted-foreground inline-flex w-fit items-center justify-center group-data-[orientation=vertical]/tabs:h-fit group-data-[orientation=vertical]/tabs:flex-col",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted",
+        line: "gap-1 bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function TabsList({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List> &
+  VariantProps<typeof tabsListVariants>) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+function TabsTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-foreground/60 hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all group-data-[orientation=vertical]/tabs:w-full group-data-[orientation=vertical]/tabs:justify-start focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 group-data-[variant=default]/tabs-list:data-[state=active]:shadow-sm group-data-[variant=line]/tabs-list:data-[state=active]:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-[state=active]:bg-transparent dark:group-data-[variant=line]/tabs-list:data-[state=active]:border-transparent dark:group-data-[variant=line]/tabs-list:data-[state=active]:bg-transparent",
+        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 data-[state=active]:text-foreground",
+        "after:bg-foreground after:absolute after:opacity-0 after:transition-opacity group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:bottom-[-5px] group-data-[orientation=horizontal]/tabs:after:h-0.5 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-1 group-data-[orientation=vertical]/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-[state=active]:after:opacity-100",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TabsContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn("flex-1 outline-none", className)}
+      {...props}
+    />
+  )
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
+</file>
+
+<file path="src/components/ui/textarea.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
+  return (
+    <textarea
+      data-slot="textarea"
+      className={cn(
+        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Textarea }
+</file>
+
+<file path="src/lib/dedup.ts">
+import { CalendarEvent } from "./types";
+
+export function deduplicateEvents(events: CalendarEvent[]): CalendarEvent[] {
+  const seen = new Set<string>();
+  return events.filter((e) => {
+    const key = `${e.title.toLowerCase().trim()}|${e.startDate}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+</file>
+
+<file path="src/lib/utils.ts">
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</file>
+
+<file path="stat200_extracted.json">
+[
+  {
+    "id": "demo-stat200-pw1",
+    "title": "STAT 200: TP Pre-work 1",
+    "type": "assignment",
+    "startDate": "2026-01-22T10:00:00-06:00",
+    "endDate": "2026-01-22T11:00:00-06:00",
+    "dueDate": "2026-01-22T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Short assignment designed to prepare you for a specific activity. Due before class.",
+    "confidence": "high",
+    "sourceSnippet": "TP Pre-work 1 due 1/22",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-pw2",
+    "title": "STAT 200: TP Pre-work 2",
+    "type": "assignment",
+    "startDate": "2026-01-29T10:00:00-06:00",
+    "endDate": "2026-01-29T11:00:00-06:00",
+    "dueDate": "2026-01-29T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Short assignment designed to prepare you for a specific activity. Due before class.",
+    "confidence": "high",
+    "sourceSnippet": "TP Pre-work 2 due 1/29",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r1",
+    "title": "STAT 200: R Assignment 1",
+    "type": "assignment",
+    "startDate": "2026-02-03T10:00:00-06:00",
+    "endDate": "2026-02-03T11:00:00-06:00",
+    "dueDate": "2026-02-03T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 1 due 2/3",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r2",
+    "title": "STAT 200: R Assignment 2",
+    "type": "assignment",
+    "startDate": "2026-02-10T10:00:00-06:00",
+    "endDate": "2026-02-10T11:00:00-06:00",
+    "dueDate": "2026-02-10T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 2 due 2/10",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r3",
+    "title": "STAT 200: R Assignment 3",
+    "type": "assignment",
+    "startDate": "2026-02-17T10:00:00-06:00",
+    "endDate": "2026-02-17T11:00:00-06:00",
+    "dueDate": "2026-02-17T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 3 due 2/17",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r4",
+    "title": "STAT 200: R Assignment 4",
+    "type": "assignment",
+    "startDate": "2026-02-24T10:00:00-06:00",
+    "endDate": "2026-02-24T11:00:00-06:00",
+    "dueDate": "2026-02-24T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 4 due 2/24",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-hw1",
+    "title": "STAT 200: TP Homework 1",
+    "type": "assignment",
+    "startDate": "2026-03-02T00:00:00-06:00",
+    "endDate": "2026-03-02T23:59:59-06:00",
+    "dueDate": "2026-03-02T23:59:59-06:00",
+    "isAllDay": true,
+    "location": null,
+    "notes": "Submitted through Gradescope. Statistical analysis using simulation in TinkerPlots.",
+    "confidence": "medium",
+    "sourceSnippet": "TP Homework 1 due 3/2",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r5",
+    "title": "STAT 200: R Assignment 5",
+    "type": "assignment",
+    "startDate": "2026-03-03T10:00:00-06:00",
+    "endDate": "2026-03-03T11:00:00-06:00",
+    "dueDate": "2026-03-03T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 5 due 3/3",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r6",
+    "title": "STAT 200: R Assignment 6",
+    "type": "assignment",
+    "startDate": "2026-03-05T10:00:00-06:00",
+    "endDate": "2026-03-05T11:00:00-06:00",
+    "dueDate": "2026-03-05T11:00:00-06:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Due Thursday before midterm. Submitted in Canvas.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 6 due 3/5",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-mt1",
+    "title": "STAT 200: Midterm 1",
+    "type": "exam",
+    "startDate": "2026-03-10T11:00:00-05:00",
+    "endDate": "2026-03-10T12:20:00-05:00",
+    "dueDate": null,
+    "isAllDay": false,
+    "location": "0035 CIF",
+    "notes": "In class. You may bring a two-sided 8.5x11\" sheet of hand-written notes.",
+    "confidence": "high",
+    "sourceSnippet": "Midterm 1 (Mar 10th)",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-pw3",
+    "title": "STAT 200: TP Pre-work 3",
+    "type": "assignment",
+    "startDate": "2026-03-26T10:00:00-05:00",
+    "endDate": "2026-03-26T11:00:00-05:00",
+    "dueDate": "2026-03-26T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Short assignment designed to prepare you for a specific activity. Due before class.",
+    "confidence": "high",
+    "sourceSnippet": "TP Pre-work 3 due 3/26",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-hw2",
+    "title": "STAT 200: TP Homework 2",
+    "type": "assignment",
+    "startDate": "2026-03-30T00:00:00-05:00",
+    "endDate": "2026-03-30T23:59:59-05:00",
+    "dueDate": "2026-03-30T23:59:59-05:00",
+    "isAllDay": true,
+    "location": null,
+    "notes": "Submitted through Gradescope. Statistical analysis using simulation in TinkerPlots.",
+    "confidence": "medium",
+    "sourceSnippet": "TP Homework 2 due 3/30",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r7",
+    "title": "STAT 200: R Assignment 7",
+    "type": "assignment",
+    "startDate": "2026-03-31T10:00:00-05:00",
+    "endDate": "2026-03-31T11:00:00-05:00",
+    "dueDate": "2026-03-31T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 7 due 3/31",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r8",
+    "title": "STAT 200: R Assignment 8",
+    "type": "assignment",
+    "startDate": "2026-04-07T10:00:00-05:00",
+    "endDate": "2026-04-07T11:00:00-05:00",
+    "dueDate": "2026-04-07T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 8 due 4/7",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-pw4",
+    "title": "STAT 200: TP Pre-work 4",
+    "type": "assignment",
+    "startDate": "2026-04-09T10:00:00-05:00",
+    "endDate": "2026-04-09T11:00:00-05:00",
+    "dueDate": "2026-04-09T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Short assignment designed to prepare you for a specific activity. Due before class.",
+    "confidence": "high",
+    "sourceSnippet": "TP Pre-work 4 due 4/9",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-hw3",
+    "title": "STAT 200: TP Homework 3",
+    "type": "assignment",
+    "startDate": "2026-04-13T00:00:00-05:00",
+    "endDate": "2026-04-13T23:59:59-05:00",
+    "dueDate": "2026-04-13T23:59:59-05:00",
+    "isAllDay": true,
+    "location": null,
+    "notes": "Submitted through Gradescope. Statistical analysis using simulation in TinkerPlots.",
+    "confidence": "medium",
+    "sourceSnippet": "TP Homework 3 due 4/13",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r9",
+    "title": "STAT 200: R Assignment 9",
+    "type": "assignment",
+    "startDate": "2026-04-14T10:00:00-05:00",
+    "endDate": "2026-04-14T11:00:00-05:00",
+    "dueDate": "2026-04-14T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 9 due 4/14",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r10",
+    "title": "STAT 200: R Assignment 10",
+    "type": "assignment",
+    "startDate": "2026-04-21T10:00:00-05:00",
+    "endDate": "2026-04-21T11:00:00-05:00",
+    "dueDate": "2026-04-21T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 10 due 4/21",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-hw4",
+    "title": "STAT 200: TP Homework 4",
+    "type": "assignment",
+    "startDate": "2026-04-27T00:00:00-05:00",
+    "endDate": "2026-04-27T23:59:59-05:00",
+    "dueDate": "2026-04-27T23:59:59-05:00",
+    "isAllDay": true,
+    "location": null,
+    "notes": "Submitted through Gradescope. Statistical analysis using simulation in TinkerPlots.",
+    "confidence": "medium",
+    "sourceSnippet": "TP Homework 4 due 4/27",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r11",
+    "title": "STAT 200: R Assignment 11",
+    "type": "assignment",
+    "startDate": "2026-04-28T10:00:00-05:00",
+    "endDate": "2026-04-28T11:00:00-05:00",
+    "dueDate": "2026-04-28T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Submitted in Canvas. Due before Tuesday's class.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 11 due 4/28",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-r12",
+    "title": "STAT 200: R Assignment 12",
+    "type": "assignment",
+    "startDate": "2026-04-30T10:00:00-05:00",
+    "endDate": "2026-04-30T11:00:00-05:00",
+    "dueDate": "2026-04-30T11:00:00-05:00",
+    "isAllDay": false,
+    "location": null,
+    "notes": "Due Thursday before midterm. Submitted in Canvas.",
+    "confidence": "high",
+    "sourceSnippet": "R Assignment 12 due 4/30",
+    "selected": true
+  },
+  {
+    "id": "demo-stat200-mt2",
+    "title": "STAT 200: Midterm 2",
+    "type": "exam",
+    "startDate": "2026-05-05T11:00:00-05:00",
+    "endDate": "2026-05-05T12:20:00-05:00",
+    "dueDate": null,
+    "isAllDay": false,
+    "location": "0035 CIF",
+    "notes": "In class. You may bring a two-sided 8.5x11\" sheet of hand-written notes.",
+    "confidence": "high",
+    "sourceSnippet": "Midterm 2 (May 5th)",
+    "selected": true
+  }
+]
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env.local
+
+.env 
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  turbopack: {},
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias.encoding = false;
+    return config;
+  },
+};
+
+export default nextConfig;
+</file>
+
+<file path="package.json">
+{
+  "name": "samur.ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@google/genai": "^1.43.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^12.34.3",
+    "ics": "^3.8.1",
+    "lucide-react": "^0.575.0",
+    "next": "^16.2.6",
+    "pdfjs-dist": "^5.4.624",
+    "radix-ui": "^1.4.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "shadcn": "^3.8.5",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="Samur.ai_PRD.md">
+# Samur.ai — PRD (Updated with Google/Outlook export buttons)
+
+## 1) One-liner
+**Samur.ai** turns pasted syllabus text into clean calendar events (assignments and/or assessments) and lets students export via **ICS** plus **one-click “Add to Google Calendar / Add to Outlook” buttons (per event)**—built around a focus/productivity “samurai” theme.
+
+---
+
+## 2) Problem
+UIUC provides an ICS export for **lecture/lab meeting times**, but **deadlines and exams** live in syllabi. Students manually copy dates into calendars, leading to missed deadlines and wasted time.
+
+---
+
+## 3) Target users
+**Primary**
+- UIUC students using Google Calendar / Outlook / Apple Calendar to manage coursework.
+
+**Secondary**
+- Any college student dealing with multiple courses and frequent deliverables.
+
+---
+
+## 4) Goals / Success metrics
+### Goals
+- Convert syllabus text into structured events quickly and reliably.
+- Give users control: extract **Assignments**, **Assessments**, or **Both**.
+- Make exporting frictionless with:
+  - **Download ICS (bulk import)**
+  - **Add to Google Calendar (single-event deep link)**
+  - **Add to Outlook Calendar (single-event deep link)**
+
+### Success metrics
+- Paste → export in **≤ 60 seconds**
+- User accepts/edit-confirms **≥ 80%** of events without major corrections
+- ICS imports into Google Calendar without errors; deep-link buttons open pre-filled event forms correctly
+
+---
+
+## 5) Non-goals (MVP)
+- Full OAuth calendar write (Google Calendar API / Microsoft Graph)
+- LMS integrations (Canvas)
+- Perfect handling of ambiguous dates like “Week 3 Friday”
+- Automatic study block generation (stretch only)
+
+---
+
+## 6) MVP user flow
+### Flow A — Paste → Review → Export
+1. **Import screen**
+   - Course name (e.g., “CS 374”)
+   - Semester (default: current semester)
+   - Timezone (default: America/Chicago)
+   - Event type filter: **Assignments / Assessments / Both**
+   - Paste syllabus text
+2. **Extract**
+   - AI returns a list of candidate events with confidence + source snippet
+3. **Review screen**
+   - Filter by type and confidence
+   - Inline edit: title, date, time, location, type
+   - Delete incorrect events
+4. **Export screen**
+   - Primary: **Download ICS (All Confirmed Events)**
+   - Secondary: **Per-event buttons**:
+     - “Add to Google Calendar” (opens Google event-create URL)
+     - “Add to Outlook” (opens Outlook web event compose URL / best-effort deep link)
+
+### Flow B — Fast path (optional)
+- If confidence is high, allow “Export immediately” but still offer “Review & edit.”
+
+---
+
+## 7) Feature set
+### MVP (must ship)
+1. **Syllabus input**
+   - Text paste required
+2. **AI extraction (Gemini API)**
+   - Strict JSON output with fields:
+     - `title`
+     - `type`: assignment | exam | quiz | lab | other
+     - `start` (datetime) and optional `end`
+     - `due` (datetime) for deadlines (if your model uses due vs start)
+     - `location` (optional)
+     - `notes` (optional)
+     - `confidence`
+     - `source_snippet`
+3. **Review + editing UI**
+   - Quick filters and inline edit
+4. **Export**
+   - **Bulk export**: ICS file for all confirmed events
+   - **Single-event export**: deep link buttons for Google/Outlook per event
+
+### Stretch (only if ahead)
+- PDF upload (extract text)
+- Study blocks before exams (simple heuristics)
+
+---
+
+## 8) Google / Outlook “Export” (Option 1 spec)
+### What “Add to Google Calendar” means
+- A button that opens a **pre-filled Google Calendar event creation page** in a new tab.
+- Works for **single events** only (one click = one event form).
+
+**Required event mapping**
+- Title → `text`
+- Start/end → `dates` (or start datetime + end datetime)
+- Location → `location`
+- Notes → `details`
+
+**UX placement**
+- On the **Review screen**, each event row shows:
+  - `Add to Google`
+  - `Add to Outlook`
+- On the **Export screen**, include:
+  - “Add next upcoming exam to Google/Outlook” as a convenient shortcut.
+
+### What “Add to Outlook” means
+- A button that opens the closest supported **Outlook web compose event** experience with pre-filled fields.
+- Also single-event only.
+
+**Required event mapping**
+- Subject/title
+- Start/end
+- Location
+- Body/notes
+
+### Key constraint (explicit)
+- These buttons **do not batch-add all events**. For adding everything at once, users use **Download ICS**.
+
+---
+
+## 9) UX / UI requirements (Best UI/UX)
+### Design principles
+- Fast, minimal steps
+- Trust: show confidence + source snippet
+- “Samurai focus” theme (clean, sharp, calm)
+
+### Pages
+1. **Landing**
+   - Value prop
+   - CTA: “Paste syllabus”
+2. **Import**
+   - Course + filter + paste box
+3. **Review**
+   - List/table with:
+     - Type chip, date/time, title, confidence
+     - Inline edit
+     - Per-event Google/Outlook buttons
+4. **Export**
+   - Download ICS
+   - Optional quick-add for next exam
+
+### Accessibility basics
+- Keyboard navigation
+- Contrast-compliant dark theme
+- Clear error states
+
+---
+
+## 10) Technical plan
+### Architecture
+- **Frontend**: Next.js (React)
+- **Backend**: Next.js API routes (or Express)
+- **AI**: Gemini API server-side
+- **ICS generation**: Node library (`ics` or `ical-generator`)
+- **No DB required** for MVP (events live in client state)
+
+### Data flow
+1. Client → `/api/extract` with syllabus text + options
+2. Backend → Gemini → JSON events
+3. Client review/edit
+4. Client → `/api/ics` with confirmed events
+5. Backend returns downloadable `.ics`
+
+### Deep link generation (frontend)
+- For each event, generate:
+  - `googleUrl(event)`
+  - `outlookUrl(event)`
+- Open in new tab with `target="_blank"`.
+
+---
+
+## 11) Requirements
+### Functional requirements
+- FR1: User can paste syllabus and select extraction type(s).
+- FR2: System extracts events and displays them with confidence + snippet.
+- FR3: User can edit/delete events.
+- FR4: System generates valid ICS for confirmed events.
+- FR5: Each event has a working **Google** and **Outlook** deep link button (pre-filled event).
+
+### Non-functional requirements
+- NFR1: Extraction completes in < 10 seconds typical.
+- NFR2: Syllabus text not stored by default.
+- NFR3: Robustness to malformed AI JSON (retry + validation).
+
+---
+
+## 12) Edge cases
+- Missing time → default:
+  - assignments: 11:59 PM local time
+  - exams: all-day or require edit if time missing
+- Ambiguous dates → low confidence + highlight for edit
+- Duplicates → dedup by (title, date)
+
+---
+
+## 13) Gemini API usage (Best Use of Gemini)
+Gemini is used for **structured extraction and normalization**:
+- return strict JSON schema
+- infer event type
+- extract location/notes
+- provide confidence + snippet for user trust
+
+---
+
+## 14) Deployment (Aedify)
+- Deploy Next.js app with live domain
+- Env vars:
+  - `GEMINI_API_KEY`
+- Demo script must show:
+  - paste → extracted list → click Google button → download ICS
+
+---
+
+## 15) Brand / theme
+**Name:** Samur.ai  
+**Motto ideas:**
+- “Cut through the clutter.”
+- “Make time for what matters.”
+
+Visual direction:
+- Dark mode
+- Minimal “dojo” UI
+- Subtle “slice” animation when extraction completes
+</file>
+
+<file path="src/app/globals.css">
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.63 0.20 350);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.63 0.20 350);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.16 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.72 0.18 350);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.22 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.72 0.18 350);
+  --chart-1: oklch(0.62 0.19 250);
+  --chart-2: oklch(0.65 0.15 20);
+  --chart-3: oklch(0.75 0.15 85);
+  --chart-4: oklch(0.65 0.2 140);
+  --chart-5: oklch(0.65 0.18 310);
+  --sidebar: oklch(0.16 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.82 0.08 350);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.22 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.82 0.08 350);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+</file>
+
+<file path="src/app/layout.tsx">
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Samur.ai — Cut through the clutter",
+  description: "Turn your syllabus into calendar events instantly. Paste, extract, export.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+      >
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="src/components/event-card.tsx">
+"use client";
+
+import { CalendarEvent } from "@/lib/types";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ConfidenceBadge } from "./confidence-badge";
+import { googleCalendarUrl, outlookCalendarUrl } from "@/lib/calendar-links";
+
+interface EventCardProps {
+  event: CalendarEvent;
+  timezone: string;
+  onEdit: () => void;
+  onDelete: () => void;
+  onToggle: () => void;
+}
+
+const typeColors: Record<string, string> = {
+  assignment: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  exam: "bg-red-500/15 text-red-400 border-red-500/30",
+  quiz: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+  lab: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+  project: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+  other: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+};
+
+function formatDate(dateStr: string): string {
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
+function formatTime(dateStr: string): string {
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  } catch {
+    return "";
+  }
+}
+
+export function EventCard({
+  event,
+  timezone,
+  onEdit,
+  onDelete,
+  onToggle,
+}: EventCardProps) {
+  return (
+    <Card
+      className={`transition-all ${
+        event.selected
+          ? "border-primary/30 bg-card"
+          : "border-border/50 bg-card/50 opacity-60"
+      }`}
+    >
+      <CardContent className="p-4 space-y-3">
+        {/* Header: checkbox + type + confidence */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={event.selected}
+              onChange={onToggle}
+              className="w-4 h-4 rounded accent-primary cursor-pointer"
+            />
+            <Badge variant="outline" className={typeColors[event.type] || typeColors.other}>
+              {event.type}
+            </Badge>
+          </div>
+          <ConfidenceBadge level={event.confidence} />
+        </div>
+
+        {/* Title */}
+        <h3 className="font-semibold text-sm leading-tight">{event.title}</h3>
+
+        {/* Date/Time + Location on same row */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="text-sm text-muted-foreground">
+            <p>{formatDate(event.startDate)}</p>
+            {!event.isAllDay && (
+              <p className="text-xs">{formatTime(event.startDate)}</p>
+            )}
+            {event.isAllDay && (
+              <p className="text-xs text-muted-foreground/70">All day</p>
+            )}
+          </div>
+          {event.location && (
+            <p className="text-xs text-muted-foreground/70 text-right shrink-0 mt-0.5">{event.location}</p>
+          )}
+        </div>
+
+        {/* Source snippet */}
+        <p className="text-xs text-muted-foreground/50 italic truncate">
+          &ldquo;{event.sourceSnippet}&rdquo;
+        </p>
+
+        {/* Actions */}
+        <div className="flex items-center gap-1 pt-1 flex-wrap">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onEdit}
+            className="text-xs h-7 cursor-pointer"
+          >
+            Edit
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onDelete}
+            className="text-xs h-7 text-destructive hover:text-destructive cursor-pointer"
+          >
+            Delete
+          </Button>
+          <a
+            href={googleCalendarUrl(event, timezone)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center text-xs h-7 px-2 rounded-md hover:bg-accent transition-colors text-blue-400"
+          >
+            Google
+          </a>
+          <a
+            href={outlookCalendarUrl(event)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center text-xs h-7 px-2 rounded-md hover:bg-accent transition-colors text-sky-400"
+          >
+            Outlook
+          </a>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+</file>
+
+<file path="src/components/export-panel.tsx">
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { CalendarEvent } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { downloadICS } from "@/lib/ics-generator";
+import { googleCalendarUrl, outlookCalendarUrl } from "@/lib/calendar-links";
+
+// Pre-computed petal positions: 24 petals in a full circle, varied distances
+const PETALS = Array.from({ length: 24 }, (_, i) => {
+  const angle = (i / 24) * Math.PI * 2 - Math.PI / 2; // start from top
+  const radius = 80 + (i % 5) * 18; // 80–152px
+  return {
+    x: Math.cos(angle) * radius,
+    y: Math.sin(angle) * radius,
+    rotate: (i * 47) % 360,
+    duration: 0.55 + (i % 4) * 0.12,
+  };
+});
+
+interface ExportPanelProps {
+  events: CalendarEvent[];
+  courseName: string;
+  timezone: string;
+  onReset: () => void;
+  onBack: () => void;
+}
+
+export function ExportPanel({
+  events,
+  courseName,
+  timezone,
+  onReset,
+  onBack,
+}: ExportPanelProps) {
+  const [bursting, setBursting] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleEvents = showAll ? events : events.slice(0, 9);
+  const hiddenCount = events.length - 9;
+
+  const handleDownloadICS = () => {
+    downloadICS(events, courseName); // existing behavior unchanged
+    setBursting(true);
+    setTimeout(() => setBursting(false), 1400);
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-2">Export Events</h2>
+        <p className="text-muted-foreground">
+          {events.length} events ready to export for{" "}
+          <span className="text-primary font-medium">{courseName}</span>
+        </p>
+      </div>
+
+      {/* Primary: Download ICS with petal burst */}
+      <div className="flex justify-center">
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <Button
+            size="lg"
+            onClick={handleDownloadICS}
+            className="text-lg px-8 py-6 cursor-pointer"
+          >
+            Download ICS File
+          </Button>
+          {bursting &&
+            PETALS.map((p, i) => (
+              <motion.div
+                key={i}
+                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                animate={{ x: p.x, y: p.y, opacity: 0, scale: 0.4, rotate: p.rotate }}
+                transition={{ duration: p.duration, ease: "easeOut" }}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 10,
+                  height: 10,
+                  marginLeft: -5,
+                  marginTop: -5,
+                  borderRadius: "15px 0 15px 0",
+                  background: "#f5789a",
+                  pointerEvents: "none",
+                  zIndex: 50,
+                }}
+              />
+            ))}
+        </div>
+      </div>
+      <p className="text-center text-sm text-muted-foreground">
+        Import this file into Google Calendar, Apple Calendar, or Outlook
+      </p>
+
+      {/* Per-event export */}
+      <div className="space-y-3">
+        <h3 className="text-lg font-semibold">Or add events individually</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {visibleEvents.map((event) => (
+            <Card key={event.id} className="bg-card">
+              <CardContent className="p-3 flex items-center justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium truncate">{event.title}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(event.startDate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div className="flex gap-1 shrink-0">
+                  <a
+                    href={googleCalendarUrl(event, timezone)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs px-2 py-1 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                  >
+                    Google
+                  </a>
+                  <a
+                    href={outlookCalendarUrl(event)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs px-2 py-1 rounded bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"
+                  >
+                    Outlook
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        {hiddenCount > 0 && !showAll && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowAll(true)}
+            className="w-full text-muted-foreground cursor-pointer"
+          >
+            Show {hiddenCount} more event{hiddenCount !== 1 ? "s" : ""}
+          </Button>
+        )}
+      </div>
+
+      {/* Bottom actions */}
+      <div className="flex justify-between pt-4">
+        <Button variant="ghost" onClick={onBack} className="cursor-pointer">
+          Back to Review
+        </Button>
+        <Button variant="outline" onClick={onReset} className="cursor-pointer">
+          Start Over
+        </Button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/lib/calendar-links.ts">
+import { CalendarEvent } from "./types";
+
+function safeDate(dateStr: string): Date {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) {
+    return new Date(); // fallback to now
+  }
+  return d;
+}
+
+function formatDateCompact(dateStr: string): string {
+  const d = safeDate(dateStr);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}${m}${day}`;
+}
+
+function formatDateTimeCompact(dateStr: string): string {
+  const d = safeDate(dateStr);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const h = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  const s = String(d.getSeconds()).padStart(2, "0");
+  return `${y}${m}${day}T${h}${min}${s}`;
+}
+
+function addDays(dateStr: string, days: number): string {
+  const d = safeDate(dateStr);
+  d.setDate(d.getDate() + days);
+  return d.toISOString();
+}
+
+function getEndDate(event: CalendarEvent): string {
+  return event.endDate || event.dueDate || addDays(event.startDate, event.isAllDay ? 1 : 0);
+}
+
+export function googleCalendarUrl(event: CalendarEvent, timezone: string): string {
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: event.title,
+    details: event.notes || "",
+    location: event.location || "",
+    ctz: timezone,
+  });
+
+  if (event.isAllDay) {
+    const startStr = formatDateCompact(event.startDate);
+    const endStr = formatDateCompact(addDays(event.startDate, 1));
+    params.set("dates", `${startStr}/${endStr}`);
+  } else {
+    const startStr = formatDateTimeCompact(event.startDate);
+    const end = getEndDate(event);
+    const endStr = formatDateTimeCompact(
+      end === event.startDate ? addDays(event.startDate, 0) : end
+    );
+    if (startStr === endStr) {
+      const d = safeDate(event.startDate);
+      d.setHours(d.getHours() + 1);
+      params.set("dates", `${startStr}/${formatDateTimeCompact(d.toISOString())}`);
+    } else {
+      params.set("dates", `${startStr}/${endStr}`);
+    }
+  }
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+export function outlookCalendarUrl(event: CalendarEvent): string {
+  const startD = safeDate(event.startDate);
+  const startDt = startD.toISOString();
+  const endDate = getEndDate(event);
+  let endDt: string;
+
+  if (endDate === event.startDate && !event.isAllDay) {
+    const d = new Date(startD);
+    d.setHours(d.getHours() + 1);
+    endDt = d.toISOString();
+  } else {
+    endDt = safeDate(endDate).toISOString();
+  }
+
+  const params = new URLSearchParams({
+    rru: "addevent",
+    subject: event.title,
+    body: event.notes || "",
+    location: event.location || "",
+    startdt: startDt,
+    enddt: endDt,
+  });
+
+  if (event.isAllDay) {
+    params.set("allday", "true");
+  }
+
+  return `https://outlook.live.com/calendar/0/action/compose?${params.toString()}`;
+}
+</file>
+
+<file path="src/lib/types.ts">
+export interface CalendarEvent {
+  id: string;
+  title: string;
+  type: "assignment" | "exam" | "quiz" | "lab" | "project" | "other";
+  startDate: string; // ISO 8601
+  endDate?: string | null; // ISO 8601
+  dueDate?: string | null; // ISO 8601
+  isAllDay: boolean;
+  location?: string | null;
+  notes?: string | null;
+  confidence: "high" | "medium" | "low";
+  sourceSnippet: string;
+  selected: boolean;
+}
+
+export interface ExtractionRequest {
+  syllabusText: string;
+  courseName: string;
+  semester: string;
+  semesterStartDate: string; // e.g. "2026-01-20"
+  timezone: string;
+  eventTypes: "assignments" | "assessments" | "both";
+}
+
+export interface ExtractionResponse {
+  events: CalendarEvent[];
+  error?: string;
+}
+</file>
+
+<file path="src/components/review-grid.tsx">
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { CalendarEvent } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { EventCard } from "./event-card";
+import { EventEditDialog } from "./event-edit-dialog";
+import { ConfidenceBadge } from "./confidence-badge";
+
+interface ReviewGridProps {
+  events: CalendarEvent[];
+  timezone: string;
+  onUpdate: (id: string, updated: Partial<CalendarEvent>) => void;
+  onDelete: (id: string) => void;
+  onToggle: (id: string) => void;
+  onExport: () => void;
+  onBack: () => void;
+}
+
+const eventTypes = ["all", "assignment", "exam", "quiz", "lab", "project", "other"] as const;
+const confidenceLevels = ["all", "high", "medium", "low"] as const;
+
+const typeColors: Record<string, string> = {
+  assignment: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  exam:       "bg-red-500/15 text-red-400 border-red-500/30",
+  quiz:       "bg-amber-500/15 text-amber-400 border-amber-500/30",
+  lab:        "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+  project:    "bg-purple-500/15 text-purple-400 border-purple-500/30",
+  other:      "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+};
+
+// Matches Tailwind *-400 colors for the timeline dots
+const dotColors: Record<string, string> = {
+  assignment: "#60a5fa",
+  exam:       "#f87171",
+  quiz:       "#fbbf24",
+  lab:        "#34d399",
+  project:    "#a78bfa",
+  other:      "#a1a1aa",
+};
+
+function fmtDate(dateStr: string): string {
+  try {
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      weekday: "short", month: "short", day: "numeric",
+    });
+  } catch { return dateStr; }
+}
+
+function fmtTime(dateStr: string): string {
+  try {
+    return new Date(dateStr).toLocaleTimeString("en-US", {
+      hour: "numeric", minute: "2-digit",
+    });
+  } catch { return ""; }
+}
+
+const containerVariants = {
+  initial: {},
+  animate: { transition: { staggerChildren: 0.06 } },
+};
+
+const cardVariants = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+export function ReviewGrid({
+  events,
+  timezone,
+  onUpdate,
+  onDelete,
+  onToggle,
+  onExport,
+  onBack,
+}: ReviewGridProps) {
+  const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [confidenceFilter, setConfidenceFilter] = useState<string>("all");
+  const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
+  const [viewMode, setViewMode] = useState<"grid" | "timeline">("grid");
+  const [displayCount, setDisplayCount] = useState(0);
+  const [showAllCards, setShowAllCards] = useState(false);
+
+  // Count up from 0 to events.length on mount / length change
+  useEffect(() => {
+    setDisplayCount(0);
+    if (events.length === 0) return;
+    const total = events.length;
+    const steps = Math.min(total, 30);
+    const increment = total / steps;
+    const stepTime = Math.max(16, Math.floor(700 / steps));
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + increment, total);
+      setDisplayCount(Math.round(current));
+      if (current >= total) clearInterval(timer);
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [events.length]);
+
+  const typeFiltered =
+    typeFilter === "all" ? events : events.filter((e) => e.type === typeFilter);
+  const filtered =
+    confidenceFilter === "all"
+      ? typeFiltered
+      : typeFiltered.filter((e) => e.confidence === confidenceFilter);
+
+  const visibleFiltered = showAllCards ? filtered : filtered.slice(0, 9);
+  const hiddenCardCount = filtered.length - 9;
+
+  const selectedCount = events.filter((e) => e.selected).length;
+
+  const selectAll = () => { events.forEach((e) => { if (!e.selected) onToggle(e.id); }); };
+  const deselectAll = () => { events.forEach((e) => { if (e.selected) onToggle(e.id); }); };
+
+  // Timeline: apply same filters, sorted chronologically
+  const timelineEvents = [...filtered].sort(
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h2 className="text-2xl font-bold">Review Events</h2>
+          <p className="text-sm text-muted-foreground">
+            {displayCount} events found &middot; {selectedCount} selected
+          </p>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* View toggle */}
+          <div className="flex border border-border rounded-lg overflow-hidden">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`px-3 py-1.5 text-sm transition-colors cursor-pointer ${
+                viewMode === "grid"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => setViewMode("timeline")}
+              className={`px-3 py-1.5 text-sm transition-colors cursor-pointer border-l border-border ${
+                viewMode === "timeline"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              Timeline
+            </button>
+          </div>
+          <Button variant="ghost" size="sm" onClick={selectAll} className="cursor-pointer">
+            Select All
+          </Button>
+          <Button variant="ghost" size="sm" onClick={deselectAll} className="cursor-pointer">
+            Deselect All
+          </Button>
+        </div>
+      </div>
+
+      {/* Type filter */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Task Type</p>
+        <div className="flex gap-2 flex-wrap">
+          {eventTypes.map((type) => (
+            <button key={type} onClick={() => { setTypeFilter(type); setShowAllCards(false); }} className="cursor-pointer">
+              <Badge variant={typeFilter === type ? "default" : "outline"} className="capitalize cursor-pointer">
+                {type}
+                {type !== "all" && (
+                  <span className="ml-1 opacity-60">({events.filter((e) => e.type === type).length})</span>
+                )}
+              </Badge>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Confidence filter */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Confidence Level</p>
+        <div className="flex gap-2 flex-wrap">
+          {confidenceLevels.map((level) => (
+            <button key={level} onClick={() => { setConfidenceFilter(level); setShowAllCards(false); }} className="cursor-pointer">
+              <Badge variant={confidenceFilter === level ? "default" : "outline"} className="capitalize cursor-pointer">
+                {level}
+                {level !== "all" && (
+                  <span className="ml-1 opacity-60">({typeFiltered.filter((e) => e.confidence === level).length})</span>
+                )}
+              </Badge>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Grid view ── */}
+      {viewMode === "grid" && (
+        <>
+          <motion.div
+            key={`grid-${typeFilter}-${confidenceFilter}-${showAllCards}`}
+            variants={containerVariants}
+            initial="initial"
+            animate="animate"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            {visibleFiltered.map((event) => (
+              <motion.div key={event.id} variants={cardVariants}>
+                <EventCard
+                  event={event}
+                  timezone={timezone}
+                  onEdit={() => setEditingEvent(event)}
+                  onDelete={() => onDelete(event.id)}
+                  onToggle={() => onToggle(event.id)}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+          {filtered.length === 0 && (
+            <div className="text-center py-12 text-muted-foreground">
+              No events match the current filter.
+            </div>
+          )}
+          {hiddenCardCount > 0 && !showAllCards && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowAllCards(true)}
+              className="w-full text-muted-foreground cursor-pointer"
+            >
+              Show {hiddenCardCount} more event{hiddenCardCount !== 1 ? "s" : ""}
+            </Button>
+          )}
+        </>
+      )}
+
+      {/* ── Timeline view ── */}
+      {viewMode === "timeline" && (
+        <div className="space-y-0">
+          {timelineEvents.length === 0 && (
+            <div className="text-center py-12 text-muted-foreground">
+              No events match the current filter.
+            </div>
+          )}
+          {timelineEvents.map((event, i) => {
+            const thisMonth = new Date(event.startDate).toLocaleDateString("en-US", {
+              month: "long", year: "numeric",
+            });
+            const prevMonth =
+              i > 0
+                ? new Date(timelineEvents[i - 1].startDate).toLocaleDateString("en-US", {
+                    month: "long", year: "numeric",
+                  })
+                : null;
+            const showMonthHeader = thisMonth !== prevMonth;
+            const isLast = i === timelineEvents.length - 1;
+
+            return (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.04, duration: 0.3, ease: "easeOut" }}
+              >
+                {showMonthHeader && (
+                  <div className="flex gap-3 items-center mb-2 mt-4 first:mt-0">
+                    <div className="w-3 shrink-0" />
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
+                      {thisMonth}
+                    </p>
+                  </div>
+                )}
+                <div className="flex gap-3 items-start">
+                  {/* Dot + connector line */}
+                  <div className="flex flex-col items-center shrink-0 w-3">
+                    <div
+                      className="w-3 h-3 rounded-full border-2 border-background mt-2 shrink-0"
+                      style={{ backgroundColor: dotColors[event.type] ?? dotColors.other }}
+                    />
+                    {!isLast && <div className="w-px flex-1 bg-border mt-1 min-h-[24px]" />}
+                  </div>
+                  {/* Event row */}
+                  <div
+                    className={`flex-1 border rounded-lg p-3 mb-3 transition-all ${
+                      event.selected
+                        ? "border-primary/30 bg-card"
+                        : "border-border/50 bg-card/50 opacity-60"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-2 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          checked={event.selected}
+                          onChange={() => onToggle(event.id)}
+                          className="w-4 h-4 rounded accent-primary cursor-pointer"
+                        />
+                        <h3 className="font-semibold text-sm">{event.title}</h3>
+                      </div>
+                      <div className="flex gap-1.5 shrink-0">
+                        <Badge
+                          variant="outline"
+                          className={typeColors[event.type] ?? typeColors.other}
+                        >
+                          {event.type}
+                        </Badge>
+                        <ConfidenceBadge level={event.confidence} />
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1 ml-6">
+                      {fmtDate(event.startDate)}
+                      {!event.isAllDay && ` · ${fmtTime(event.startDate)}`}
+                      {event.location && ` · ${event.location}`}
+                    </p>
+                    <div className="flex gap-1 mt-2 ml-6">
+                      <Button
+                        variant="ghost" size="sm"
+                        onClick={() => setEditingEvent(event)}
+                        className="text-xs h-7 cursor-pointer"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="ghost" size="sm"
+                        onClick={() => onDelete(event.id)}
+                        className="text-xs h-7 text-destructive hover:text-destructive cursor-pointer"
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Bottom actions */}
+      <div className="flex justify-between pt-4">
+        <Button variant="ghost" onClick={onBack} className="cursor-pointer">
+          Back
+        </Button>
+        <Button onClick={onExport} disabled={selectedCount === 0} className="cursor-pointer">
+          Export {selectedCount} Events
+        </Button>
+      </div>
+
+      {/* Edit dialog — preserved exactly */}
+      <EventEditDialog
+        event={editingEvent}
+        open={editingEvent !== null}
+        onSave={onUpdate}
+        onClose={() => setEditingEvent(null)}
+      />
+    </div>
+  );
+}
+</file>
+
+<file path="src/lib/ics-generator.ts">
+import { CalendarEvent } from "./types";
+
+function safeDate(dateStr: string): Date {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return new Date();
+  return d;
+}
+
+function formatICSDate(date: Date): string {
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(date.getUTCDate()).padStart(2, "0");
+  const h = String(date.getUTCHours()).padStart(2, "0");
+  const min = String(date.getUTCMinutes()).padStart(2, "0");
+  const s = String(date.getUTCSeconds()).padStart(2, "0");
+  return `${y}${m}${d}T${h}${min}${s}Z`;
+}
+
+function escapeICS(str: string): string {
+  return str.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+}
+
+function generateICSContent(events: CalendarEvent[]): string {
+  const lines: string[] = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Samur.ai//Calendar//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+  ];
+
+  for (const event of events) {
+    const start = safeDate(event.startDate);
+    let end: Date;
+
+    if (event.endDate) {
+      end = safeDate(event.endDate);
+    } else if (event.dueDate) {
+      end = safeDate(event.dueDate);
+    } else {
+      end = new Date(start);
+      end.setHours(end.getHours() + 1);
+    }
+
+    // If end is same as start or before start, add 1 hour
+    if (end.getTime() <= start.getTime()) {
+      end = new Date(start);
+      end.setHours(end.getHours() + 1);
+    }
+
+    lines.push("BEGIN:VEVENT");
+    lines.push(`UID:${event.id}@samurai`);
+    lines.push(`DTSTART:${formatICSDate(start)}`);
+    lines.push(`DTEND:${formatICSDate(end)}`);
+    lines.push(`SUMMARY:${escapeICS(event.title)}`);
+    if (event.location) {
+      lines.push(`LOCATION:${escapeICS(event.location)}`);
+    }
+    if (event.notes) {
+      lines.push(`DESCRIPTION:${escapeICS(event.notes)}`);
+    }
+    lines.push(`CATEGORIES:${event.type.toUpperCase()}`);
+    lines.push("END:VEVENT");
+  }
+
+  lines.push("END:VCALENDAR");
+  return lines.join("\r\n");
+}
+
+export function downloadICS(events: CalendarEvent[], courseName: string) {
+  const content = generateICSContent(events);
+  const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${courseName.replace(/\s+/g, "_")}_events.ics`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</file>
+
+<file path="README.md">
+# Samur.ai 🌸
+
+Cut through the clutter.
+
+Samur.ai extracts assignment and exam deadlines from course syllabi and turns them into calendar events in seconds.
+
+Live Site: https://samur--ai.tech/  
+Demo: https://youtu.be/JRgR3coU1pg  
+HackIllinois Submission: https://devpost.com/software/samur-ai  
+
+---
+
+## The Problem
+
+Every semester, students manually copy deadlines from syllabus PDFs into their calendars. It’s repetitive, time-consuming, and easy to get wrong. Important dates are often buried in dense formatting or tables, and missing one can have real academic consequences.
+
+---
+
+## What Samur.ai Does
+
+1. Upload a syllabus PDF or paste raw text.
+2. AI extracts assignments, exams, and due dates.
+3. Review extracted events with confidence scores.
+4. Export directly to:
+   - Google Calendar  
+   - Outlook  
+   - Standard `.ics` file  
+
+No manual copying. No formatting headaches.
+
+---
+
+## How It Works
+
+- **Frontend:** Next.js + React  
+- **Styling:** Tailwind CSS  
+- **AI Processing:** Google Gemini Flash 2.5  
+
+Syllabi are sent to Gemini Flash 2.5, which parses unstructured text and identifies temporal patterns such as due dates, exam times, and recurring assignments. The model returns structured JSON that is validated before generating calendar events.
+
+Each event includes a confidence score so users can review uncertain extractions before exporting.
+
+---
+
+## Challenges
+
+- Handling recurring deadlines (e.g., “Homework due every Friday”)
+- Extracting reliable structure from complex PDF layouts
+- Prompt engineering to consistently produce strict, valid JSON output
+
+---
+
+## What We’re Proud Of
+
+- A confidence scoring system that flags uncertain dates for review
+- A streamlined PDF upload flow that feeds directly into the model
+- Direct calendar export with minimal friction
+
+---
+
+## What’s Next
+
+- Direct LMS integration (Canvas, Blackboard)
+- Automatic study block scheduling before major exams
+- Improved recurring event detection and validation
+
+---
+
+## Running Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/barmanax/samur.ai.git
+cd samur.ai
+```
+
+### 2. Install dependencies
+```
+npm install
+```
+
+### 3. Add environment variables
+
+Create a `.env.local` file in the root directory:
+
+```
+GEMINI_API_KEY=your_google_gemini_key
+```
+
+### 4. Run the development server
+
+```
+npm run dev
+```
+
+Open http://localhost:3000
+</file>
+
+<file path="src/lib/gemini-prompt.ts">
+import { ExtractionRequest } from "./types";
+
+export function buildExtractionPrompt(request: ExtractionRequest): string {
+  const typeInstruction =
+    request.eventTypes === "assignments"
+      ? "Extract ONLY assignments, homework, projects, and lab submissions (deadlines/due dates). Do NOT extract exams, quizzes, or tests."
+      : request.eventTypes === "assessments"
+        ? "Extract ONLY exams, quizzes, tests, and midterms. Do NOT extract assignments or homework."
+        : "Extract ALL academic events: assignments, homework, projects, exams, quizzes, tests, midterms, finals, and lab submissions.";
+
+  return `You are an expert academic calendar event extractor. Your job is to extract structured calendar events from a course syllabus.
+
+## Context
+- Course: ${request.courseName}
+- Semester: ${request.semester}
+- First day of classes: ${request.semesterStartDate}
+- Timezone: ${request.timezone}
+
+## What to Extract
+${typeInstruction}
+
+## Rules
+1. Extract ONLY events that are explicitly stated or clearly implied in the syllabus. Do not invent events.
+2. For recurring patterns like "HW due every Friday" or "weekly quizzes on Monday", expand into individual events for EACH week of the semester. The semester starts on ${request.semesterStartDate} and runs approximately:
+   - Spring/Fall: ~16 weeks from the start date
+   - Summer: ~8 weeks from the start date
+   Week 1 begins on the semester start date (${request.semesterStartDate}). Use this to calculate exact dates for week-based references like "Week 7".
+3. Date/time defaults for assignments/homework/projects:
+   - Create a 59-minute calendar block BEFORE the deadline. For example, if due at 11:59 PM, set startDate to 11:00 PM and endDate to 11:59 PM on the same day.
+   - If the syllabus specifies an exact due time, use that as endDate and set startDate to 1 hour before.
+   - If the syllabus says "due before class" and class times are mentioned, use the class start time as endDate and 1 hour before as startDate.
+   - If no due time can be determined at all, default to startDate=23:00 (11 PM) and endDate=23:59 (11:59 PM) on the due date.
+   - ALWAYS set both startDate and endDate for assignments. Never leave endDate as null for assignments.
+4. Date/time defaults for exams/quizzes:
+   - If no time is specified: mark as all-day events (isAllDay: true)
+   - If only a week number is given (e.g., "Week 7"), span the event across that entire week (Monday to Friday)
+5. Confidence levels:
+   - "high": exact date and type are explicitly stated
+   - "medium": date is stated but time is inferred or type is ambiguous
+   - "low": date is approximate, week-based, or unclear
+6. Deduplicate: if the same event appears multiple times, include it only once.
+7. Include the exact source_snippet from the syllabus (verbatim, max 100 chars).
+8. Prefix each event title with the course name (e.g., "${request.courseName} HW 3").
+9. Location rules:
+   - If an exam/quiz has no specific location listed, use the lecture/class location if one is mentioned anywhere in the syllabus.
+   - If no location is mentioned anywhere in the syllabus at all, set location to null. Do NOT make up locations.
+
+## Output Format
+Return a JSON array of objects with these exact fields:
+[
+  {
+    "title": "string - descriptive title with course prefix",
+    "type": "assignment" | "exam" | "quiz" | "lab" | "project" | "other",
+    "startDate": "ISO 8601 datetime string with timezone offset",
+    "endDate": "ISO 8601 datetime string or null",
+    "dueDate": "ISO 8601 datetime string or null",
+    "isAllDay": boolean,
+    "location": "string or null",
+    "notes": "string or null - any additional context",
+    "confidence": "high" | "medium" | "low",
+    "sourceSnippet": "string - verbatim text from syllabus"
+  }
+]
+
+Return ONLY the JSON array. No markdown, no explanation, no wrapping.
+
+## Syllabus Text
+${request.syllabusText}`;
+}
+</file>
+
+<file path="src/app/api/extract/route.ts">
+import { NextRequest, NextResponse } from "next/server";
+import { GoogleGenAI } from "@google/genai";
+import { buildExtractionPrompt } from "@/lib/gemini-prompt";
+import { deduplicateEvents } from "@/lib/dedup";
+import { CalendarEvent } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
+export const runtime = "edge";
+
+export async function POST(request: NextRequest) {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+  try {
+    const contentType = request.headers.get("content-type") || "";
+    let courseName: string;
+    let semester: string;
+    let semesterStartDate: string;
+    let timezone: string;
+    let eventTypes: string;
+    let syllabusText: string | undefined;
+    let pdfBase64: string | undefined;
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      courseName = formData.get("courseName") as string;
+      semester = formData.get("semester") as string;
+      semesterStartDate = formData.get("semesterStartDate") as string;
+      timezone = formData.get("timezone") as string;
+      eventTypes = formData.get("eventTypes") as string;
+      syllabusText = formData.get("syllabusText") as string || undefined;
+
+      const pdfFile = formData.get("pdfFile") as File | null;
+      if (pdfFile) {
+        const buffer = await pdfFile.arrayBuffer();
+        const bytes = new Uint8Array(buffer);
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        pdfBase64 = btoa(binary);
+      }
+    } else {
+      const body = await request.json();
+      courseName = body.courseName;
+      semester = body.semester;
+      semesterStartDate = body.semesterStartDate;
+      timezone = body.timezone;
+      eventTypes = body.eventTypes;
+      syllabusText = body.syllabusText;
+    }
+
+    if (!courseName || (!syllabusText && !pdfBase64)) {
+      return NextResponse.json(
+        { events: [], error: "Course name and syllabus (text or PDF) are required." },
+        { status: 400 }
+      );
+    }
+
+    const prompt = buildExtractionPrompt({
+      courseName,
+      semester,
+      semesterStartDate,
+      timezone,
+      eventTypes: eventTypes as "assignments" | "assessments" | "both",
+      syllabusText: syllabusText || "(See attached PDF)",
+    });
+
+    // Build contents array for Gemini
+    const parts: Array<{ text: string } | { inlineData: { mimeType: string; data: string } }> = [
+      { text: prompt },
+    ];
+
+    if (pdfBase64) {
+      parts.push({
+        inlineData: {
+          mimeType: "application/pdf",
+          data: pdfBase64,
+        },
+      });
+    }
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [{ role: "user", parts }],
+      config: {
+        responseMimeType: "application/json",
+      },
+    });
+
+    const text = response.text;
+    if (!text) {
+      return NextResponse.json(
+        { events: [], error: "Empty response from Gemini." },
+        { status: 500 }
+      );
+    }
+
+    let rawEvents: Array<Record<string, unknown>>;
+    try {
+      rawEvents = JSON.parse(text);
+    } catch {
+      return NextResponse.json(
+        { events: [], error: "Failed to parse Gemini response as JSON." },
+        { status: 500 }
+      );
+    }
+
+    if (!Array.isArray(rawEvents)) {
+      return NextResponse.json(
+        { events: [], error: "Gemini response is not an array." },
+        { status: 500 }
+      );
+    }
+
+    const events: CalendarEvent[] = rawEvents.map((e, i) => ({
+      id: crypto.randomUUID?.() ?? `event-${Date.now()}-${i}`,
+      title: String(e.title || "Untitled Event"),
+      type: validateType(e.type),
+      startDate: String(e.startDate || ""),
+      endDate: e.endDate ? String(e.endDate) : undefined,
+      dueDate: e.dueDate ? String(e.dueDate) : undefined,
+      isAllDay: Boolean(e.isAllDay),
+      location: e.location ? String(e.location) : undefined,
+      notes: e.notes ? String(e.notes) : undefined,
+      confidence: validateConfidence(e.confidence),
+      sourceSnippet: String(e.sourceSnippet || e.source_snippet || ""),
+      selected: true,
+    }));
+
+    const dedupedEvents = deduplicateEvents(events);
+
+    return NextResponse.json({ events: dedupedEvents });
+  } catch (error) {
+    console.error("Extraction error:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json(
+      { events: [], error: `Extraction failed: ${message}` },
+      { status: 500 }
+    );
+  }
+}
+
+function validateType(type: unknown): CalendarEvent["type"] {
+  const valid = ["assignment", "exam", "quiz", "lab", "project", "other"];
+  return valid.includes(String(type)) ? (String(type) as CalendarEvent["type"]) : "other";
+}
+
+function validateConfidence(confidence: unknown): CalendarEvent["confidence"] {
+  const valid = ["high", "medium", "low"];
+  return valid.includes(String(confidence))
+    ? (String(confidence) as CalendarEvent["confidence"])
+    : "medium";
+}
+</file>
+
+<file path="src/app/page.tsx">
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { LandingHero } from "@/components/landing-hero";
+import { Stepper } from "@/components/stepper";
+import { ImportForm } from "@/components/import-form";
+import { LoadingScreen } from "@/components/loading-screen";
+import { ReviewGrid } from "@/components/review-grid";
+import { ExportPanel } from "@/components/export-panel";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "@/components/theme-provider";
+import { CalendarEvent } from "@/lib/types";
+import demoEvents from "../../stat200_extracted.json";
+
+type Step = "landing" | "import" | "loading" | "review" | "export";
+
+const stepIndex: Record<Step, number> = {
+  landing: -1,
+  import: 0,
+  loading: 0,
+  review: 1,
+  export: 2,
+};
+
+// Diagonal katana-slash reveal: top leads, bottom follows (\-direction sweep)
+const pageVariants = {
+  initial: { clipPath: "polygon(0% 0%, 8% 0%, -8% 100%, 0% 100%)" },
+  animate: {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    transition: { duration: 0.58, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: {
+    clipPath: "polygon(100% 0%, 115% 0%, 95% 100%, 80% 100%)",
+    transition: { duration: 0.39, ease: [0.55, 0, 1, 0.45] as const },
+  },
+};
+
+export default function Home() {
+  const { theme } = useTheme();
+  const [step, setStep] = useState<Step>("landing");
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [courseName, setCourseName] = useState("");
+  const [timezone, setTimezone] = useState("America/Chicago");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleExtract = async (formData: FormData) => {
+    setLoading(true);
+    setError(null);
+    setCourseName(formData.get("courseName") as string);
+    setTimezone(formData.get("timezone") as string);
+    setStep("loading");
+
+    if (formData.get("demo") === "true") {
+      await new Promise((resolve) => setTimeout(resolve, 2600));
+      setEvents(demoEvents as CalendarEvent[]);
+      setStep("review");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/extract", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setError(data.error || "Failed to extract events.");
+        setStep("import");
+        return;
+      }
+
+      if (data.events.length === 0) {
+        setError("No events found in the syllabus. Try pasting a different section.");
+        setStep("import");
+        return;
+      }
+
+      setEvents(data.events);
+      setStep("review");
+    } catch {
+      setError("Network error. Please try again.");
+      setStep("import");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateEvent = (id: string, updated: Partial<CalendarEvent>) => {
+    setEvents((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, ...updated } : e))
+    );
+  };
+
+  const handleDeleteEvent = (id: string) => {
+    setEvents((prev) => prev.filter((e) => e.id !== id));
+  };
+
+  const handleToggleEvent = (id: string) => {
+    setEvents((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, selected: !e.selected } : e))
+    );
+  };
+
+  const handleReset = () => {
+    setEvents([]);
+    setCourseName("");
+    setError(null);
+    setStep("landing");
+  };
+
+  return (
+    <main className="min-h-screen overflow-hidden relative">
+      <ThemeToggle />
+      {/* Transparent cherry blossom tree — background for inner pages */}
+      {step !== "landing" && (
+        <div style={{ position: "fixed", bottom: 0, right: 0, width: "60%", height: "100vh", zIndex: 0, pointerEvents: "none", opacity: 0.055 }}>
+          <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+            <defs>
+              <g id="bg-flower">
+                <circle cx="0" cy="-14" r="11" fill="#f5789a" />
+                <circle cx="-13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="-8" cy="12" r="11" fill="#f5789a" />
+                <circle cx="8" cy="12" r="11" fill="#f5789a" />
+              </g>
+              <path id="bg-spetal" d="M0,0 C-8,-8 -8,-16 0,-20 C8,-16 8,-8 0,0" fill="#f5789a" />
+            </defs>
+            {/* Trunk and branches */}
+            <g fill={theme === "dark" ? "#ffffff" : "#0c0c0c"}>
+              <path d="M650,1000 L600,850 L610,800 L560,650 L580,620 L500,500 L520,490 L590,600 L650,780 L680,1000 Z" />
+              <path d="M570,640 L500,580 L420,590 L350,500 L370,490 L450,560 L520,550 L585,610 Z" />
+              <path d="M430,570 L380,450 L310,400 L320,380 L390,440 L450,550 Z" />
+              <path d="M350,500 L280,480 L220,400 L230,380 L300,460 L360,480 Z" />
+              <path d="M390,440 L350,350 L370,360 L400,430 Z" />
+              <path d="M310,400 L250,320 L270,330 L320,390 Z" />
+              <path d="M610,800 L700,720 L750,600 L820,480 L800,470 L730,590 L680,700 L595,760 Z" />
+              <path d="M740,600 L820,550 L880,450 L860,440 L800,530 L720,580 Z" />
+              <path d="M700,720 L780,680 L840,650 L830,630 L760,660 Z" />
+              <path d="M880,450 L950,400 L940,390 L875,440 Z" />
+              <path d="M500,500 L450,400 L460,300 L480,310 L470,410 L515,490 Z" />
+              <path d="M460,300 L420,220 L440,230 L470,310 Z" />
+              <path d="M520,320 L560,250 L580,260 L530,330 Z" />
+            </g>
+            {/* Flowers */}
+            <use href="#bg-flower" transform="translate(220, 400) scale(1.1)" />
+            <use href="#bg-flower" transform="translate(280, 480) scale(0.9)" />
+            <use href="#bg-flower" transform="translate(350, 350) scale(1.3)" />
+            <use href="#bg-flower" transform="translate(310, 400) scale(0.8)" />
+            <use href="#bg-flower" transform="translate(250, 320) scale(1)" />
+            <use href="#bg-flower" transform="translate(420, 220) scale(1.4)" />
+            <use href="#bg-flower" transform="translate(470, 310) scale(1.1)" />
+            <use href="#bg-flower" transform="translate(560, 250) scale(1.2)" />
+            <use href="#bg-flower" transform="translate(520, 320) scale(0.9)" />
+            <use href="#bg-flower" transform="translate(450, 400) scale(1.3)" />
+            <use href="#bg-flower" transform="translate(750, 600) scale(1.2)" />
+            <use href="#bg-flower" transform="translate(820, 550) scale(1.3)" />
+            <use href="#bg-flower" transform="translate(880, 450) scale(1.1)" />
+            <use href="#bg-flower" transform="translate(840, 650) scale(0.8)" />
+            <use href="#bg-flower" transform="translate(950, 400) scale(1.2)" />
+            <use href="#bg-flower" transform="translate(880, 580) scale(1)" />
+            <use href="#bg-spetal" transform="translate(180, 380) scale(1.2) rotate(60)" />
+            <use href="#bg-spetal" transform="translate(680, 500) scale(1.5) rotate(-20)" />
+            <use href="#bg-spetal" transform="translate(920, 500) scale(1.2) rotate(80)" />
+          </svg>
+        </div>
+      )}
+      <AnimatePresence mode="wait" initial={false}>
+        {step === "landing" && (
+          <motion.div key="landing" variants={pageVariants} initial="initial" animate="animate" exit="exit">
+            <LandingHero onGetStarted={() => setStep("import")} />
+          </motion.div>
+        )}
+
+        {(step === "import" || step === "loading") && (
+          <motion.div key="import" variants={pageVariants} initial="initial" animate="animate" exit="exit">
+            <div className="max-w-4xl mx-auto px-4 py-12">
+              <Stepper currentStep={stepIndex[step]} />
+              {step === "loading" ? (
+                <LoadingScreen />
+              ) : (
+                <>
+                  {error && (
+                    <div className="mb-6 p-4 rounded-lg bg-destructive/10 text-destructive text-sm">
+                      {error}
+                    </div>
+                  )}
+                  <ImportForm onSubmit={handleExtract} loading={loading} />
+                </>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {step === "review" && (
+          <motion.div key="review" variants={pageVariants} initial="initial" animate="animate" exit="exit">
+            <div className="max-w-6xl mx-auto px-4 py-12">
+              <Stepper currentStep={stepIndex[step]} />
+              <ReviewGrid
+                events={events}
+                timezone={timezone}
+                onUpdate={handleUpdateEvent}
+                onDelete={handleDeleteEvent}
+                onToggle={handleToggleEvent}
+                onExport={() => setStep("export")}
+                onBack={() => setStep("import")}
+              />
+            </div>
+          </motion.div>
+        )}
+
+        {step === "export" && (
+          <motion.div key="export" variants={pageVariants} initial="initial" animate="animate" exit="exit">
+            <div className="max-w-4xl mx-auto px-4 py-12">
+              <Stepper currentStep={stepIndex[step]} />
+              <ExportPanel
+                events={events.filter((e) => e.selected)}
+                courseName={courseName}
+                timezone={timezone}
+                onReset={handleReset}
+                onBack={() => setStep("review")}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
+  );
+}
+</file>
+
+<file path="src/components/landing-hero.tsx">
+"use client";
+
+import { useTheme } from "./theme-provider";
+
+interface LandingHeroProps {
+  onGetStarted: () => void;
+}
+
+export function LandingHero({ onGetStarted }: LandingHeroProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  const c = isDark
+    ? {
+        bg: "#0d0d0d",
+        text: "#f0f0f0",
+        subtitle: "#888",
+        caption: "#444",
+        trunk: "#e8e8e8",
+        samurai: "#e8e8e8",
+        samuraiScabbard: "#b0b0b0",
+        flowerCenter: "#f5789a",
+      }
+    : {
+        bg: "#fcfcfc",
+        text: "#000",
+        subtitle: "#555",
+        caption: "#aaa",
+        trunk: "#0c0c0c",
+        samurai: "#0c0c0c",
+        samuraiScabbard: "#1f1f1f",
+        flowerCenter: "#000",
+      };
+
+  return (
+    <>
+      <style>{`
+        @keyframes sl-fall {
+          0%   { top: -10%; opacity: 0; }
+          10%  { opacity: 1; }
+          75%  { opacity: 1; }
+          100% { top: 110%; opacity: 0; }
+        }
+        @keyframes sl-sway {
+          0%   { transform: scale(var(--ps, 1)) translateX(-25px) rotate(0deg); }
+          100% { transform: scale(var(--ps, 1)) translateX(25px) rotate(100deg); }
+        }
+        .sl-leaf { position: absolute; top: -10%; animation: sl-fall linear infinite; }
+        .sl-petal {
+          width: 14px; height: 14px;
+          border-radius: 15px 0 15px 0;
+          background: #f5789a;
+          --ps: 1;
+          animation: sl-sway 3s ease-in-out infinite alternate;
+        }
+        .sl-leaf:nth-child(1)  { left: 10%; animation-duration: 11s; animation-delay: -2s;  }
+        .sl-leaf:nth-child(2)  { left: 20%; animation-duration: 14s; animation-delay: -5s;  }
+        .sl-leaf:nth-child(3)  { left: 30%; animation-duration: 10s; animation-delay: -7s;  }
+        .sl-leaf:nth-child(4)  { left: 40%; animation-duration: 13s; animation-delay: -1s;  }
+        .sl-leaf:nth-child(5)  { left: 50%; animation-duration: 12s; animation-delay: -4s;  }
+        .sl-leaf:nth-child(6)  { left: 60%; animation-duration: 15s; animation-delay: -8s;  }
+        .sl-leaf:nth-child(7)  { left: 70%; animation-duration: 11s; animation-delay: -3s;  }
+        .sl-leaf:nth-child(8)  { left: 80%; animation-duration: 14s; animation-delay: -6s;  }
+        .sl-leaf:nth-child(9)  { left: 90%; animation-duration: 12s; animation-delay: -2s;  }
+        .sl-leaf:nth-child(10) { left: 85%; animation-duration: 10s; animation-delay: -9s;  }
+        .sl-leaf:nth-child(11) { left: 15%; animation-duration: 16s; animation-delay: -1s;  }
+        .sl-leaf:nth-child(12) { left: 35%; animation-duration: 12s; animation-delay: -5s;  }
+        .sl-leaf:nth-child(13) { left: 55%; animation-duration: 14s; animation-delay: -7s;  }
+        .sl-leaf:nth-child(14) { left: 75%; animation-duration: 11s; animation-delay: -4s;  }
+        .sl-leaf:nth-child(15) { left: 95%; animation-duration: 13s; animation-delay: -6s;  }
+        .sl-leaf:nth-child(even) .sl-petal { --ps: 0.7; opacity: 0.8; animation-duration: 4s; animation-direction: alternate-reverse; }
+        .sl-leaf:nth-child(3n)   .sl-petal { --ps: 1.1; animation-duration: 3.5s; }
+        .sl-cta {
+          background-color: #f5789a;
+          color: white;
+          padding: 16px 45px;
+          border: none;
+          border-radius: 4px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          letter-spacing: 0.5px;
+          transition: background 0.3s, transform 0.2s;
+          font-family: inherit;
+        }
+        .sl-cta:hover { background-color: #e06283; transform: translateY(-2px); }
+      `}</style>
+
+      {/* Full-screen container */}
+      <div style={{
+        backgroundColor: c.bg,
+        minHeight: "100vh",
+        width: "100%",
+        overflow: "hidden",
+        position: "relative",
+        color: c.text,
+        fontFamily: "'Inter', 'Geist', sans-serif",
+      }}>
+
+        {/* Left-aligned hero text */}
+        <main style={{
+          position: "absolute", top: 0, left: 0,
+          width: "100%", height: "100%",
+          display: "flex", flexDirection: "column", justifyContent: "center",
+          paddingLeft: "10%",
+          zIndex: 10,
+          pointerEvents: "none",
+        }}>
+          <div style={{ maxWidth: 500, pointerEvents: "auto" }}>
+            <h1 style={{
+              fontWeight: 300,
+              fontSize: "clamp(3rem, 6vw, 4.5rem)",
+              letterSpacing: "-2px",
+              marginBottom: 20,
+              lineHeight: 1.1,
+              color: c.text,
+            }}>
+              Samur<span style={{ color: "#f5789a" }}>.ai</span>
+            </h1>
+            <p style={{
+              fontWeight: 400,
+              fontSize: "1.15rem",
+              color: c.subtitle,
+              marginBottom: 40,
+              lineHeight: 1.6,
+            }}>
+              Turn your syllabus into calendar events in seconds.<br />
+              Cut through the clutter.
+            </p>
+            <button className="sl-cta" onClick={onGetStarted}>
+              Get Started
+            </button>
+            <p style={{ marginTop: 24, fontSize: "0.85rem", color: c.caption }}>
+              Make time for what matters.
+            </p>
+          </div>
+        </main>
+
+        {/* Falling cherry blossom petals */}
+        <div style={{
+          position: "absolute", top: 0, left: 0,
+          width: "100%", height: "100%",
+          zIndex: 5, pointerEvents: "none",
+        }}>
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div key={i} className="sl-leaf">
+              <div className="sl-petal" />
+            </div>
+          ))}
+        </div>
+
+        {/* Cherry blossom tree — pinned bottom-right */}
+        <div style={{
+          position: "absolute", bottom: 0, right: 0,
+          width: "60%", height: "100vh",
+          zIndex: 1, pointerEvents: "none",
+        }}>
+          <svg
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="xMaxYMax slice"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <defs>
+              <g id="sl-flower">
+                <circle cx="0" cy="-14" r="11" fill="#f5789a" />
+                <circle cx="-13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="-8" cy="12" r="11" fill="#f5789a" />
+                <circle cx="8" cy="12" r="11" fill="#f5789a" />
+                <circle cx="0" cy="0" r="4" fill={c.flowerCenter} />
+              </g>
+              <g id="sl-flower-plain">
+                <circle cx="0" cy="-14" r="11" fill="#f5789a" />
+                <circle cx="-13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="13" cy="-4" r="11" fill="#f5789a" />
+                <circle cx="-8" cy="12" r="11" fill="#f5789a" />
+                <circle cx="8" cy="12" r="11" fill="#f5789a" />
+              </g>
+              <path id="sl-spetal" d="M0,0 C-8,-8 -8,-16 0,-20 C8,-16 8,-8 0,0" fill="#f5789a" />
+            </defs>
+
+            {/* Ink-brush trunk and branches */}
+            <g fill={c.trunk}>
+              <path d="M650,1000 L600,850 L610,800 L560,650 L580,620 L500,500 L520,490 L590,600 L650,780 L680,1000 Z" />
+              <path d="M570,640 L500,580 L420,590 L350,500 L370,490 L450,560 L520,550 L585,610 Z" />
+              <path d="M430,570 L380,450 L310,400 L320,380 L390,440 L450,550 Z" />
+              <path d="M350,500 L280,480 L220,400 L230,380 L300,460 L360,480 Z" />
+              <path d="M390,440 L350,350 L370,360 L400,430 Z" />
+              <path d="M310,400 L250,320 L270,330 L320,390 Z" />
+              <path d="M610,800 L700,720 L750,600 L820,480 L800,470 L730,590 L680,700 L595,760 Z" />
+              <path d="M740,600 L820,550 L880,450 L860,440 L800,530 L720,580 Z" />
+              <path d="M700,720 L780,680 L840,650 L830,630 L760,660 Z" />
+              <path d="M820,550 L880,580 L870,590 L810,560 Z" />
+              <path d="M880,450 L950,400 L940,390 L875,440 Z" />
+              <path d="M500,500 L450,400 L460,300 L480,310 L470,410 L515,490 Z" />
+              <path d="M460,300 L420,220 L440,230 L470,310 Z" />
+              <path d="M450,400 L520,320 L510,310 L445,390 Z" />
+              <path d="M520,320 L560,250 L580,260 L530,330 Z" />
+            </g>
+
+            {/* Left branch flowers */}
+            <use href="#sl-flower"       transform="translate(220, 400) scale(1.1) rotate(20)"  />
+            <use href="#sl-flower-plain" transform="translate(280, 480) scale(0.9) rotate(-15)" />
+            <use href="#sl-flower"       transform="translate(350, 350) scale(1.3) rotate(45)"  />
+            <use href="#sl-flower-plain" transform="translate(310, 400) scale(0.8)"             />
+            <use href="#sl-flower"       transform="translate(250, 320) scale(1)   rotate(-30)" />
+            <use href="#sl-spetal"       transform="translate(180, 380) scale(1.2) rotate(60)"  />
+            <use href="#sl-spetal"       transform="translate(200, 440) scale(0.9) rotate(110)" />
+
+            {/* Center & top flowers */}
+            <use href="#sl-flower"       transform="translate(420, 220) scale(1.4) rotate(10)"  />
+            <use href="#sl-flower-plain" transform="translate(470, 310) scale(1.1) rotate(80)"  />
+            <use href="#sl-flower"       transform="translate(560, 250) scale(1.2) rotate(-20)" />
+            <use href="#sl-flower-plain" transform="translate(520, 320) scale(0.9)"             />
+            <use href="#sl-flower"       transform="translate(450, 400) scale(1.3) rotate(35)"  />
+            <use href="#sl-spetal"       transform="translate(380, 250) scale(1.3) rotate(-45)" />
+            <use href="#sl-spetal"       transform="translate(500, 200) scale(1.1) rotate(15)"  />
+
+            {/* Right branch flowers */}
+            <use href="#sl-flower"       transform="translate(750, 600) scale(1.2) rotate(-10)" />
+            <use href="#sl-flower-plain" transform="translate(820, 550) scale(1.3) rotate(40)"  />
+            <use href="#sl-flower"       transform="translate(880, 450) scale(1.1) rotate(25)"  />
+            <use href="#sl-flower-plain" transform="translate(840, 650) scale(0.8) rotate(-50)" />
+            <use href="#sl-flower"       transform="translate(950, 400) scale(1.2) rotate(15)"  />
+            <use href="#sl-flower-plain" transform="translate(880, 580) scale(1)"               />
+            <use href="#sl-spetal"       transform="translate(920, 500) scale(1.2) rotate(80)"  />
+            <use href="#sl-spetal"       transform="translate(790, 680) scale(0.9) rotate(30)"  />
+
+            {/* Mid trunk / scattered */}
+            <use href="#sl-flower-plain" transform="translate(580, 620) scale(0.8) rotate(10)"  />
+            <use href="#sl-spetal"       transform="translate(680, 500) scale(1.5) rotate(-20)" />
+            <use href="#sl-spetal"       transform="translate(450, 620) scale(1.1) rotate(45)"  />
+
+            {/* Samurai silhouette — ink-brush style, standing left of trunk */}
+            <g fill={c.samurai} transform="translate(478, 1000)">
+              {/* Sandals */}
+              <rect x="-16" y="-11" width="13" height="11" rx="2" />
+              <rect x="3"   y="-11" width="13" height="11" rx="2" />
+              {/* Hakama — wide flared pants */}
+              <path d="M-16,-11 L-23,-70 L0,-70 Z" />
+              <path d="M16,-11 L23,-70 L0,-70 Z" />
+              {/* Do — chest armor */}
+              <rect x="-19" y="-136" width="38" height="68" rx="3" />
+              {/* Left osode — shoulder guard */}
+              <path d="M-19,-132 L-40,-120 L-38,-100 L-19,-112 Z" />
+              {/* Right osode — shoulder guard */}
+              <path d="M19,-132 L40,-120 L38,-100 L19,-112 Z" />
+              {/* Left kote — forearm */}
+              <rect x="-42" y="-120" width="13" height="50" rx="5" />
+              {/* Right kote — raised to hold katana */}
+              <path d="M27,-120 L32,-76 L41,-79 L36,-120 Z" />
+              {/* Neck */}
+              <rect x="-5" y="-150" width="10" height="16" />
+              {/* Head */}
+              <ellipse cx="0" cy="-166" rx="17" ry="19" />
+              {/* Kabuto — helmet dome */}
+              <path d="M-17,-164 C-23,-202 23,-202 17,-164 Z" />
+              {/* Shikoro — neck guard flares */}
+              <path d="M-17,-168 L-30,-153 L-25,-144 L-14,-161 Z" />
+              <path d="M17,-168 L30,-153 L25,-144 L14,-161 Z" />
+              {/* Maedate — crescent moon crest */}
+              <path d="M-2,-202 C-10,-220 2,-230 8,-218 C2,-215 -3,-207 -2,-202 Z" />
+              {/* Katana blade */}
+              <path d="M39,-80 L80,-218 L83,-216 L42,-78 Z" />
+              {/* Tsuba — hand guard */}
+              <ellipse cx="40" cy="-79" rx="7" ry="4.5" transform="rotate(-65 40 -79)" />
+              {/* Saya — scabbard at left hip */}
+              <path d="M-22,-105 L-50,-58 L-46,-55 L-18,-102 Z" fill={c.samuraiScabbard} />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </>
+  );
+}
+</file>
+
+<file path="src/components/import-form.tsx">
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+interface ImportFormProps {
+  onSubmit: (formData: FormData) => void;
+  loading: boolean;
+}
+
+const timezones = [
+  { label: "Central (Chicago)", value: "America/Chicago" },
+  { label: "Eastern (New York)", value: "America/New_York" },
+  { label: "Mountain (Denver)", value: "America/Denver" },
+  { label: "Pacific (Los Angeles)", value: "America/Los_Angeles" },
+];
+
+export function ImportForm({ onSubmit, loading }: ImportFormProps) {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.set("courseName", "STAT 200");
+    formData.set("semester", "Spring 2026");
+    formData.set("semesterStartDate", "2026-01-20");
+    formData.set("timezone", "America/Chicago");
+    formData.set("eventTypes", "both");
+    formData.set("demo", "true");
+    onSubmit(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+      {/* Demo mode notice */}
+      <div className="rounded-lg border border-amber-500/30 bg-amber-500/8 px-4 py-3">
+        <p className="text-sm font-medium text-amber-600 dark:text-amber-400">
+          Demo mode
+        </p>
+        <p className="text-sm text-muted-foreground mt-0.5">
+          AI extraction is currently disabled to reduce upkeep costs and prevent misuse.
+          The STAT 200 Spring 2026 syllabus is pre-loaded below. Hit{" "}
+          <span className="font-medium">Extract Events</span> to see what it can do!
+        </p>
+      </div>
+
+      <fieldset disabled className="space-y-6 opacity-50 pointer-events-none">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="courseName">Course Name</Label>
+            <Input id="courseName" value="STAT 200" readOnly />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="semester">Semester</Label>
+            <Select value="Spring 2026">
+              <SelectTrigger id="semester">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Spring 2026">Spring 2026</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="semesterStart">First Day of Classes</Label>
+            <Input id="semesterStart" type="date" value="2026-01-20" readOnly />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="timezone">Timezone</Label>
+            <Select value="America/Chicago">
+              <SelectTrigger id="timezone">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {timezones.map((tz) => (
+                  <SelectItem key={tz.value} value={tz.value}>
+                    {tz.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label>Event Types</Label>
+          <div className="flex gap-1 rounded-lg bg-muted p-1">
+            {(["both", "assignments", "assessments"] as const).map((type) => (
+              <div
+                key={type}
+                className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium text-center capitalize ${
+                  type === "both"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {type}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label>Syllabus</Label>
+          <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-primary font-medium">
+                Stat200S26 Syllabus.pdf
+              </span>
+              <span className="text-sm text-muted-foreground">pre-loaded</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full text-lg py-6 cursor-pointer"
+        disabled={loading}
+      >
+        Extract Events
+      </Button>
+    </form>
+  );
+}
+</file>
+
+</files>
